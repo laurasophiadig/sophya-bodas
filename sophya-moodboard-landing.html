@@ -37,7 +37,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:16px 4
 @media(max-width:720px){.hero{grid-template-columns:1fr}}
 
 /* LEFT */
-.left{padding:64px 52px 56px;background:var(--white);display:flex;flex-direction:column;justify-content:center}
+.left{padding:64px 52px 56px;background:var(--crema);display:flex;flex-direction:column;justify-content:center}
 .eyebrow{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--cobre);margin-bottom:22px}
 h1{font-family:var(--font-serif);font-size:42px;font-weight:300;line-height:1.12;color:var(--teal);letter-spacing:-.01em;margin-bottom:18px}
 h1 em{color:var(--malva);font-style:italic}
@@ -61,8 +61,12 @@ input[type=email]::placeholder{color:var(--cobre);opacity:.5;font-style:italic;f
   cursor:pointer;transition:background var(--dur) var(--ease)
 }
 #submit-btn:hover{background:var(--teal-deep)}
-#submit-btn:disabled{opacity:.6;cursor:not-allowed}
+#submit-btn:disabled{opacity:.55;cursor:not-allowed}
 .form-note{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+.gdpr-wrap{display:flex;align-items:flex-start;gap:10px;margin-top:2px}
+.gdpr-wrap input[type=checkbox]{width:15px;height:15px;flex-shrink:0;margin-top:2px;accent-color:var(--teal);cursor:pointer}
+.gdpr-label{font-size:11px;line-height:1.55;color:var(--muted)}
+.gdpr-label a{color:var(--cobre);text-decoration:underline;text-underline-offset:2px}
 
 /* STATE — success */
 .form-success{display:none;padding:20px;background:rgba(14,75,79,.06);border-radius:var(--r);border-left:2px solid var(--cobre);font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--teal);line-height:1.7}
@@ -80,21 +84,33 @@ input[type=email]::placeholder{color:var(--cobre);opacity:.5;font-style:italic;f
 .hv-swatches span{flex:1;height:30px}
 .hv-card-q{font-family:var(--font-serif);font-size:15px;font-style:italic;font-weight:300;color:var(--teal);line-height:1.5}
 
-/* QUÉ INCLUYE / PARA QUIÉN */
-.includes{padding:80px 40px;background:var(--crema)}
-.inc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;max-width:980px;margin:0 auto;align-items:start}
-@media(max-width:720px){.inc-grid{grid-template-columns:1fr;gap:36px}}
-.what-lbl{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--cobre);margin-bottom:22px}
-.what-list{list-style:none;display:flex;flex-direction:column;gap:16px}
-.what-list li{display:flex;align-items:flex-start;gap:14px;font-size:14px;line-height:1.65;color:var(--teal-deep)}
-.what-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--cobre);margin-top:8px;flex-shrink:0}
+/* QUÉ INCLUYE */
+.includes{padding:88px 40px 0;background:var(--white)}
+.inc-header{text-align:center;margin-bottom:56px}
+.inc-eyebrow{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--cobre);margin-bottom:14px}
+.inc-title{font-family:var(--font-serif);font-size:36px;font-weight:300;color:var(--teal);line-height:1.2}
+.inc-title em{color:var(--malva);font-style:italic}
+.inc-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1080px;margin:0 auto}
+@media(max-width:900px){.inc-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.inc-cards{grid-template-columns:1fr}}
+.inc-card{padding:40px 32px 44px;border-top:1px solid rgba(178,124,82,.35);border-right:1px solid rgba(14,75,79,.08)}
+.inc-card:last-child{border-right:none}
+@media(max-width:900px){.inc-card:nth-child(2){border-right:none}.inc-card:nth-child(3){border-right:1px solid rgba(14,75,79,.08)}.inc-card:nth-child(4){border-right:none}}
+.inc-n{font-family:var(--font-serif);font-size:52px;font-weight:300;color:var(--arena);line-height:1;margin-bottom:20px;letter-spacing:-.02em}
+.inc-card-t{font-family:var(--font-serif);font-size:20px;font-weight:400;color:var(--teal);margin-bottom:12px;line-height:1.2}
+.inc-card-d{font-size:13px;line-height:1.75;color:var(--muted)}
 
-.for-block{background:var(--white);padding:34px 32px;border-left:2px solid var(--malva);box-shadow:var(--sh)}
-.for-lbl{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--cobre);margin-bottom:16px}
-.for-txt{font-family:var(--font-serif);font-size:18px;font-weight:300;font-style:italic;color:var(--teal);line-height:1.7}
-.for-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:22px;padding-top:20px;border-top:1px solid rgba(14,75,79,.12)}
-.for-list li{display:flex;align-items:flex-start;gap:11px;font-size:13px;line-height:1.6;color:var(--teal-deep)}
-.for-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--malva);margin-top:7px;flex-shrink:0}
+/* PARA QUIÉN */
+.for-who{background:var(--teal-deep);padding:80px 40px}
+.for-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center}
+@media(max-width:760px){.for-inner{grid-template-columns:1fr;gap:48px}}
+.for-quote-lbl{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--cobre);margin-bottom:20px}
+.for-quote{font-family:var(--font-serif);font-size:26px;font-weight:300;font-style:italic;color:var(--crema);line-height:1.55}
+.for-items{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+@media(max-width:640px){.for-items{grid-template-columns:1fr;gap:24px}}
+.for-item{border-top:1px solid rgba(230,215,184,.2);padding-top:20px}
+.for-item-t{font-family:var(--font-serif);font-size:17px;font-weight:400;color:var(--arena);margin-bottom:8px}
+.for-item-d{font-size:13px;line-height:1.7;color:rgba(246,239,230,.6)}
 
 /* SECCIÓN GENÉRICA */
 .sec-head{text-align:center;max-width:560px;margin:0 auto 52px}
@@ -180,7 +196,11 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
                placeholder="tu@email.com"
                required
                autocomplete="email">
-        <button type="submit" id="submit-btn">Acceder al moodboard →</button>
+        <div class="gdpr-wrap">
+          <input type="checkbox" id="consent-main" required>
+          <label class="gdpr-label" for="consent-main">Acepto recibir el moodboard y comunicaciones de Sophya. <a href="privacidad.html" target="_blank">Política de privacidad</a>.</label>
+        </div>
+        <button type="submit" id="submit-btn" disabled>Acceder al moodboard →</button>
         <span class="form-note">Sin spam. Solo el recurso y novedades de Sophya.</span>
       </form>
 
@@ -191,44 +211,60 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
   </div>
 
   <div class="hero-visual">
-    <img class="hv-img" src="images/muestra1.png" alt="Invitación de boda diseñada por Sophya">
+    <img class="hv-img" src="images/portada-modboard.png" alt="Moodboard de Sophya">
     <div class="hv-frame"></div>
-    <div class="hv-tag">Imagen real Sophya</div>
-    <div class="hv-card">
-      <div class="hv-card-lbl">Vuestra paleta</div>
-      <div class="hv-swatches">
-        <span style="background:#0E4B4F"></span>
-        <span style="background:#7C4B6E"></span>
-        <span style="background:#B27C52"></span>
-        <span style="background:#E6D7B8"></span>
-        <span style="background:#F6EFE6"></span>
-      </div>
-      <p class="hv-card-q">De una idea suelta a una imagen con criterio.</p>
-    </div>
   </div>
 
 </section>
 
 <section class="includes">
-  <div class="inc-grid">
-    <div>
-      <div class="what-lbl">Qué incluye</div>
-      <ul class="what-list">
-        <li>App de moodboard — arrastra fotos, colores, flores y localizaciones en un tablero visual propio</li>
-        <li>Un apartado de guía de estilo, <em style="font-family:var(--font-serif);color:var(--teal)">"Encuentra vuestra imagen"</em> — cuatro preguntas que os ayudan a concretar las ideas antes de la primera reunión</li>
-        <li>Descarga en PNG—la lleváis a cada cita y todo parte de vuestra imagen, no de la de siempre</li>
-        <li>Funciona desde cualquier dispositivo, sin instalar nada</li>
-      </ul>
+  <div class="inc-header">
+    <div class="inc-eyebrow">Qué incluye</div>
+    <h2 class="inc-title">Todo lo que necesitáis<br><em>antes de la primera reunión.</em></h2>
+  </div>
+  <div class="inc-cards">
+    <div class="inc-card">
+      <div class="inc-n">01</div>
+      <div class="inc-card-t">Tablero visual propio</div>
+      <p class="inc-card-d">Arrastra fotos, colores, flores y localizaciones hasta que todo empiece a tener sentido en un solo lugar.</p>
     </div>
+    <div class="inc-card">
+      <div class="inc-n">02</div>
+      <div class="inc-card-t">Guía de estilo</div>
+      <p class="inc-card-d">Cuatro preguntas que concretan lo que ya sentís y aún no sabíais nombrar. Vuestra imagen, con palabras.</p>
+    </div>
+    <div class="inc-card">
+      <div class="inc-n">03</div>
+      <div class="inc-card-t">Descarga en PNG</div>
+      <p class="inc-card-d">Lo lleváis a cada cita. La florista, el fotógrafo, quien diseña: todos parten de lo mismo.</p>
+    </div>
+    <div class="inc-card">
+      <div class="inc-n">04</div>
+      <div class="inc-card-t">Sin instalar nada</div>
+      <p class="inc-card-d">Funciona desde cualquier dispositivo. Abrís el link y empezáis. Así de directo.</p>
+    </div>
+  </div>
+</section>
 
-    <div class="for-block">
-      <div class="for-lbl">Para quién es esto</div>
-      <p class="for-txt">"Sabemos lo que nos gusta. Solo necesitábamos verlo junto—completo—antes de empezar."</p>
-      <ul class="for-list">
-        <li>Tenéis referencias por todas partes y ninguna forma de verlas juntas</li>
-        <li>Queréis que vuestra boda se sienta vuestra, no una plantilla</li>
-        <li>Sois parejas con criterio, que cuidáis cada detalle de lo que creáis</li>
-      </ul>
+<section class="for-who">
+  <div class="for-inner">
+    <div>
+      <div class="for-quote-lbl">Para quién es esto</div>
+      <p class="for-quote">"Sabemos lo que nos gusta. Solo necesitábamos verlo junto, completo, antes de empezar."</p>
+    </div>
+    <div class="for-items">
+      <div class="for-item">
+        <div class="for-item-t">Tenéis referencias dispersas</div>
+        <p class="for-item-d">Guardadas en carpetas, Pinterest, fotos de móvil. Sin forma de verlas juntas.</p>
+      </div>
+      <div class="for-item">
+        <div class="for-item-t">Queréis algo vuestro</div>
+        <p class="for-item-d">No una plantilla. Que la boda se sienta como vosotros, no como el catálogo de siempre.</p>
+      </div>
+      <div class="for-item">
+        <div class="for-item-t">Cuidáis cada detalle</div>
+        <p class="for-item-d">Sois parejas con criterio. El diseño no es un extra: es parte de cómo celebráis.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -283,8 +319,12 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
         method="POST"
         target="_blank">
     <input type="email" name="email_address" placeholder="tu@email.com" required autocomplete="email">
-    <button type="submit" class="cta-submit">Crear nuestro moodboard →</button>
+    <button type="submit" class="cta-submit" disabled>Crear nuestro moodboard →</button>
   </form>
+  <div class="gdpr-wrap" style="justify-content:center;max-width:560px;margin:10px auto 0">
+    <input type="checkbox" id="consent-cta" required>
+    <label class="gdpr-label" for="consent-cta">Acepto recibir el moodboard y comunicaciones de Sophya. <a href="privacidad.html" target="_blank">Política de privacidad</a>.</label>
+  </div>
   <div class="form-success" style="max-width:560px;margin:16px auto 0">Listo. Abriendo el moodboard ahora mismo…</div>
   <p class="cta-note">Sin spam. Solo el recurso y novedades de Sophya.</p>
 </section>
@@ -296,6 +336,14 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 
 <script>
 (function(){
+  // Checkbox → habilita botón
+  document.getElementById('consent-main').addEventListener('change', function(){
+    document.getElementById('submit-btn').disabled = !this.checked;
+  });
+  document.getElementById('consent-cta').addEventListener('change', function(){
+    this.closest('.cta').querySelector('.cta-submit').disabled = !this.checked;
+  });
+
   var forms = document.querySelectorAll('.signup-form');
   forms.forEach(function(form){
     form.addEventListener('submit', function(e){
