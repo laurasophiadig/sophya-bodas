@@ -1,0 +1,14 @@
+# Archivos internos — no publicar
+CLAUDE.md
+CLAUDEX.MD
+brand.md
+principles.md
+landing-page-brief.md
+references/offer.md
+references/moodboard-emails.md
+
+# Editor / sistema
+.claude/
+.vscode/
+*.DS_Store
+Thumbs.db

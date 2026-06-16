@@ -1,0 +1,48 @@
+/* Sophya — Design Tokens
+   Fuente: sistema de diseño de Sophya (colors_and_type.css + ui_kits/website/styles.css)
+   Capturado del Resumen de estilos. NO inventar colores fuera de esta paleta. */
+
+:root {
+  /* Paleta de marca */
+  --sophya-teal:       #0E4B4F;  /* acento primario / titulares */
+  --sophya-teal-deep:  #093336;  /* fondos profundos */
+  --sophya-malva:      #7C4B6E;  /* emoción / énfasis (itálicas) */
+  --sophya-lila:       #DCCCEC;  /* énfasis sobre fondo teal */
+  --sophya-cobre:      #B27C52;  /* acento cálido / detalles */
+  --sophya-crema:      #F6EFE6;  /* papel / fondo */
+  --sophya-arena:      #E6D7B8;  /* arena */
+  --sophya-white:      #FBF8F3;  /* base */
+
+  /* Roles semánticos */
+  --bg:           var(--sophya-white);
+  --bg-paper:     var(--sophya-crema);
+  --bg-sand:      var(--sophya-arena);
+  --bg-deep:      var(--sophya-teal);
+  --fg:           #2A2622;       /* ink */
+  --fg-muted:     #4A4540;       /* ink-2 */
+  --fg-subtle:    #6B655E;       /* ink-3 */
+  --accent:       var(--sophya-teal);
+  --accent-warm:  var(--sophya-cobre);
+  --accent-emotion: var(--sophya-malva);
+  --line:         var(--sophya-arena);
+  --fg-on-deep:   var(--sophya-crema);
+
+  /* Tipografía */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:    'Figtree', -apple-system, sans-serif;
+
+  /* Escala (del Resumen de estilos) */
+  --fs-display: 104px;  /* lh 1.05, weight 300, serif */
+  --fs-h1: 72px;        /* lh 1.15, weight 400, serif (teal) */
+  --fs-h2: 52px;        /* lh 1.15, weight 400, serif; em -> malva */
+  --fs-h3: 38px;        /* weight 500, serif */
+  --fs-h4: 28px;        /* serif */
+  --fs-h5: 22px;        /* weight 500, SANS (titulares funcionales) */
+}
+
+/* Reglas de uso
+   - Titulares display/H1-H4: Cormorant Garamond. Color teal por defecto.
+   - Énfasis emocional: itálica en malva (o lila sobre fondo teal).
+   - H5 y textos funcionales (precio, etiquetas, nav): sans.
+   - Cobre: detalles y acentos cálidos, nunca como fondo dominante.
+   - Nada fuera de esta paleta. Sin mezclar colores sin intención. */

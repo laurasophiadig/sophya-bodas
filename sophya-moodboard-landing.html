@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Moodboard de Sophya — Gratis para parejas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0E4B4F;
+  --teal-deep:#093336;
+  --malva:#7C4B6E;
+  --cobre:#B27C52;
+  --crema:#F6EFE6;
+  --arena:#E6D7B8;
+  --white:#FBF8F3;
+  --ink:#0a0a0a;
+  --muted:#6A7A70;
+  --font-serif:'Cormorant Garamond',serif;
+  --font-sans:'DM Sans',sans-serif;
+  --r:2px;
+  --sh:0 1px 6px rgba(14,75,79,.08),0 3px 14px rgba(14,75,79,.06);
+  --sh-lift:0 4px 24px rgba(14,75,79,.14);
+  --dur:260ms;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html,body{min-height:100%;font-family:var(--font-sans);background:var(--crema);color:var(--teal-deep)}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:var(--white);border-bottom:1px solid rgba(14,75,79,.08);position:sticky;top:0;z-index:10}
+.logo{font-family:var(--font-serif);font-size:22px;font-weight:300;letter-spacing:.1em;color:var(--teal);text-transform:lowercase}
+.nav-tag{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--cobre);opacity:.8}
+
+/* HERO GRID */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 55px)}
+@media(max-width:720px){.hero{grid-template-columns:1fr}}
+
+/* LEFT */
+.left{padding:64px 52px 56px;background:var(--white);display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--cobre);margin-bottom:22px}
+h1{font-family:var(--font-serif);font-size:42px;font-weight:300;line-height:1.12;color:var(--teal);letter-spacing:-.01em;margin-bottom:18px}
+h1 em{color:var(--malva);font-style:italic}
+.sub{font-size:14.5px;line-height:1.8;color:var(--muted);margin-bottom:40px;max-width:400px}
+
+/* FORM */
+.form-wrap{max-width:380px}
+.form-wrap form{display:flex;flex-direction:column;gap:10px}
+input[type=email]{
+  width:100%;padding:13px 16px;
+  border:1px solid rgba(14,75,79,.22);border-radius:var(--r);
+  background:var(--crema);font-family:var(--font-sans);font-size:14px;
+  color:var(--teal-deep);outline:none;transition:border-color var(--dur) var(--ease)
+}
+input[type=email]:focus{border-color:var(--cobre)}
+input[type=email]::placeholder{color:var(--cobre);opacity:.5;font-style:italic;font-family:var(--font-serif);font-size:15px}
+#submit-btn{
+  width:100%;padding:15px 24px;background:var(--teal);color:var(--crema);
+  border:none;border-radius:var(--r);font-family:var(--font-sans);
+  font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  cursor:pointer;transition:background var(--dur) var(--ease)
+}
+#submit-btn:hover{background:var(--teal-deep)}
+#submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.form-note{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+
+/* STATE — success */
+.form-success{display:none;padding:20px;background:rgba(14,75,79,.06);border-radius:var(--r);border-left:2px solid var(--cobre);font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--teal);line-height:1.7}
+
+/* RIGHT — VISUAL */
+.hero-visual{position:relative;background:var(--arena);overflow:hidden;min-height:calc(100vh - 55px)}
+@media(max-width:720px){.hero-visual{min-height:60vh}}
+.hv-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hv-frame{position:absolute;inset:22px;border:1px solid rgba(246,239,230,.55);pointer-events:none;z-index:2}
+.hv-tag{position:absolute;top:38px;left:38px;z-index:3;font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--crema);background:rgba(9,51,54,.55);backdrop-filter:blur(4px);padding:8px 14px}
+/* tarjeta paleta flotante — evoca el moodboard */
+.hv-card{position:absolute;bottom:38px;left:38px;right:38px;max-width:300px;z-index:3;background:rgba(251,248,243,.94);backdrop-filter:blur(6px);padding:16px 18px;box-shadow:0 8px 28px rgba(9,51,54,.22);border-left:2px solid var(--cobre)}
+.hv-card-lbl{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--cobre);margin-bottom:10px}
+.hv-swatches{display:flex;gap:0;margin-bottom:12px}
+.hv-swatches span{flex:1;height:30px}
+.hv-card-q{font-family:var(--font-serif);font-size:15px;font-style:italic;font-weight:300;color:var(--teal);line-height:1.5}
+
+/* QUÉ INCLUYE / PARA QUIÉN */
+.includes{padding:80px 40px;background:var(--crema)}
+.inc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;max-width:980px;margin:0 auto;align-items:start}
+@media(max-width:720px){.inc-grid{grid-template-columns:1fr;gap:36px}}
+.what-lbl{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--cobre);margin-bottom:22px}
+.what-list{list-style:none;display:flex;flex-direction:column;gap:16px}
+.what-list li{display:flex;align-items:flex-start;gap:14px;font-size:14px;line-height:1.65;color:var(--teal-deep)}
+.what-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--cobre);margin-top:8px;flex-shrink:0}
+
+.for-block{background:var(--white);padding:34px 32px;border-left:2px solid var(--malva);box-shadow:var(--sh)}
+.for-lbl{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--cobre);margin-bottom:16px}
+.for-txt{font-family:var(--font-serif);font-size:18px;font-weight:300;font-style:italic;color:var(--teal);line-height:1.7}
+.for-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:22px;padding-top:20px;border-top:1px solid rgba(14,75,79,.12)}
+.for-list li{display:flex;align-items:flex-start;gap:11px;font-size:13px;line-height:1.6;color:var(--teal-deep)}
+.for-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--malva);margin-top:7px;flex-shrink:0}
+
+/* SECCIÓN GENÉRICA */
+.sec-head{text-align:center;max-width:560px;margin:0 auto 52px}
+.sec-eyebrow{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--cobre);margin-bottom:16px}
+.sec-title{font-family:var(--font-serif);font-size:34px;font-weight:300;line-height:1.18;color:var(--teal);letter-spacing:-.01em}
+.sec-title em{color:var(--malva);font-style:italic}
+
+/* CÓMO FUNCIONA */
+.how{padding:84px 40px;background:var(--white)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;max-width:980px;margin:0 auto}
+@media(max-width:720px){.steps{grid-template-columns:1fr;gap:28px}}
+.step{border-top:1px solid rgba(14,75,79,.14);padding-top:22px}
+.step-num{font-family:var(--font-serif);font-size:13px;font-weight:400;letter-spacing:.2em;color:var(--cobre);margin-bottom:14px}
+.step-t{font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--teal);margin-bottom:10px}
+.step-d{font-size:13.5px;line-height:1.7;color:var(--muted)}
+
+/* FILOSOFÍA */
+.philo{padding:96px 40px;background:var(--teal-deep);text-align:center}
+.philo-q{font-family:var(--font-serif);font-size:30px;font-weight:300;font-style:italic;line-height:1.4;color:var(--crema);max-width:680px;margin:0 auto 24px;letter-spacing:.01em}
+.philo-q span{color:var(--arena)}
+.philo-s{font-size:14px;line-height:1.8;color:rgba(246,239,230,.7);max-width:480px;margin:0 auto}
+
+/* CTA CIERRE */
+.cta{padding:88px 40px;background:var(--arena);text-align:center}
+.cta-t{font-family:var(--font-serif);font-size:34px;font-weight:300;color:var(--teal);margin-bottom:14px}
+.cta-t em{color:var(--malva);font-style:italic}
+.cta-s{font-size:14px;line-height:1.7;color:var(--teal-deep);opacity:.75;max-width:420px;margin:0 auto 32px}
+.cta-btn{display:inline-block;padding:16px 40px;background:var(--teal);color:var(--crema);border-radius:var(--r);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background var(--dur) var(--ease)}
+.cta-btn:hover{background:var(--teal-deep)}
+.cta-form{display:flex;gap:10px;max-width:560px;margin:0 auto;text-align:left}
+.cta-form input[type=email]{flex:1;background:var(--white)}
+.cta-submit{flex-shrink:0;padding:13px 30px;background:var(--teal);color:var(--crema);border:none;border-radius:var(--r);font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background var(--dur) var(--ease)}
+.cta-submit:hover{background:var(--teal-deep)}
+.cta-submit:disabled{opacity:.6;cursor:not-allowed}
+.cta-note{font-size:11px;color:var(--teal-deep);opacity:.6;letter-spacing:.04em;margin-top:14px}
+@media(max-width:560px){.cta-form{flex-direction:column}}
+
+/* QUIÉN SOY */
+.soy{padding:90px 40px;background:var(--crema)}
+.soy-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:center}
+.soy-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:3px;display:block}
+.soy-content{text-align:left}
+.soy-lbl{font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--cobre);margin-bottom:24px}
+.soy-txt{font-family:var(--font-serif);font-size:24px;font-weight:300;line-height:1.5;color:var(--teal);margin-bottom:24px}
+.soy-txt em{color:var(--malva);font-style:italic}
+.soy-body{font-size:14.5px;line-height:1.85;color:var(--muted);margin-bottom:18px}
+.soy-body em{font-style:italic;color:var(--teal)}
+@media(max-width:680px){.soy-inner{grid-template-columns:1fr}.soy-img{max-width:240px}.soy-content{text-align:center}}
+
+/* FOOTER */
+footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(230,215,184,.1)}
+.ft-logo{font-family:var(--font-serif);font-size:18px;font-weight:300;letter-spacing:.1em;color:var(--arena);text-transform:lowercase}
+.ft-note{font-size:11px;color:rgba(230,215,184,.55);letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">sophya</div>
+  <span class="nav-tag">Recurso gratuito</span>
+</nav>
+
+<section class="hero" id="empezar">
+
+  <div class="left">
+    <div class="eyebrow">El moodboard de Sophya</div>
+    <h1>Reúne la imagen<br>de vuestra boda—<br><em>antes de la<br>primera reunión.</em></h1>
+    <p class="sub">Un moodboard interactivo y una guía de estilo, gratis. En minutos veis vuestra idea clara y completa—lista para cada decisión que viene.</p>
+
+    <div class="form-wrap">
+      <!--
+        INSTRUCCIONES:
+        1. En Kit: Grow → Landing Pages & Forms → tu formulario → Embed → HTML
+        2. Copia el action URL (https://app.kit.com/forms/FORM_ID/subscriptions)
+        3. Reemplaza FORM_ID_AQUI con tu ID real
+      -->
+      <form id="signup-form" class="signup-form"
+            action="https://app.kit.com/forms/9561184/subscriptions"
+            method="POST"
+            target="_blank">
+        <input type="email"
+               name="email_address"
+               placeholder="tu@email.com"
+               required
+               autocomplete="email">
+        <button type="submit" id="submit-btn">Acceder al moodboard →</button>
+        <span class="form-note">Sin spam. Solo el recurso y novedades de Sophya.</span>
+      </form>
+
+      <div class="form-success">
+        Listo. Abriendo el moodboard ahora mismo…
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <img class="hv-img" src="images/muestra1.png" alt="Invitación de boda diseñada por Sophya">
+    <div class="hv-frame"></div>
+    <div class="hv-tag">Imagen real Sophya</div>
+    <div class="hv-card">
+      <div class="hv-card-lbl">Vuestra paleta</div>
+      <div class="hv-swatches">
+        <span style="background:#0E4B4F"></span>
+        <span style="background:#7C4B6E"></span>
+        <span style="background:#B27C52"></span>
+        <span style="background:#E6D7B8"></span>
+        <span style="background:#F6EFE6"></span>
+      </div>
+      <p class="hv-card-q">De una idea suelta a una imagen con criterio.</p>
+    </div>
+  </div>
+
+</section>
+
+<section class="includes">
+  <div class="inc-grid">
+    <div>
+      <div class="what-lbl">Qué incluye</div>
+      <ul class="what-list">
+        <li>App de moodboard — arrastra fotos, colores, flores y localizaciones en un tablero visual propio</li>
+        <li>Un apartado de guía de estilo, <em style="font-family:var(--font-serif);color:var(--teal)">"Encuentra vuestra imagen"</em> — cuatro preguntas que os ayudan a concretar las ideas antes de la primera reunión</li>
+        <li>Descarga en PNG—la lleváis a cada cita y todo parte de vuestra imagen, no de la de siempre</li>
+        <li>Funciona desde cualquier dispositivo, sin instalar nada</li>
+      </ul>
+    </div>
+
+    <div class="for-block">
+      <div class="for-lbl">Para quién es esto</div>
+      <p class="for-txt">"Sabemos lo que nos gusta. Solo necesitábamos verlo junto—completo—antes de empezar."</p>
+      <ul class="for-list">
+        <li>Tenéis referencias por todas partes y ninguna forma de verlas juntas</li>
+        <li>Queréis que vuestra boda se sienta vuestra, no una plantilla</li>
+        <li>Sois parejas con criterio, que cuidáis cada detalle de lo que creáis</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Cómo funciona</div>
+    <h2 class="sec-title">Tres pasos. <em>Diez minutos.</em></h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-t">Reúne</div>
+      <p class="step-d">Sube fotos, colores y referencias. Arrástralo todo a un mismo tablero hasta que empiece a tener sentido.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-t">Clarifica</div>
+      <p class="step-d">Abrid el apartado de guía de estilo. Cuatro preguntas que concretan lo que ya sentís y aún no sabíais nombrar.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-t">Comparte</div>
+      <p class="step-d">Llegáis a cada cita con la idea clara y completa. La florista, el fotógrafo, quien diseña—todos parten de lo mismo: vuestra imagen.</p>
+    </div>
+  </div>
+</section>
+
+<section class="philo">
+  <p class="philo-q">La imagen de una boda no es la suma de sus partes—es la <span>coherencia</span> entre ellas.</p>
+  <p class="philo-s">El moodboard es donde empieza esa coherencia. Antes de contratar nada, sabéis quiénes sois visualmente.</p>
+</section>
+
+<section class="soy">
+  <div class="soy-inner">
+    <img class="soy-img" src="images/laurasophia-sophya.jpg" alt="Laura Sophia, fundadora de Sophya">
+    <div class="soy-content">
+      <div class="soy-lbl">Quién está detrás</div>
+      <p class="soy-txt">Soy <em>Laura</em>. Diseño la imagen visual completa de bodas en Sophya.</p>
+      <p class="soy-body">Creo en las bodas que se parecen a quienes las celebran—no a un catálogo. Cada proyecto empieza por entender vuestro estilo y traducirlo, con coherencia, a cada pieza: de la invitación a lo que verán vuestros invitados el día de.</p>
+      <p class="soy-body">Llevo años diseñando piezas para bodas que se sienten únicas—invitaciones, papelería e imagen digital que capturan lo que cada pareja lleva dentro. Lo que más me mueve es ese momento en que todo encaja y la imagen cobra sentido: no solo bonita—suya.</p>
+      <p class="soy-body">Hice este moodboard porque la pregunta que más me llega es <em>"¿por dónde empezamos?"</em>. Esto es mi respuesta.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2 class="cta-t">Vuestro punto de <em>partida.</em></h2>
+  <p class="cta-s">Dejad vuestro email y abrís el moodboard al momento. Es gratis.</p>
+  <form class="signup-form cta-form"
+        action="https://app.kit.com/forms/9561184/subscriptions"
+        method="POST"
+        target="_blank">
+    <input type="email" name="email_address" placeholder="tu@email.com" required autocomplete="email">
+    <button type="submit" class="cta-submit">Crear nuestro moodboard →</button>
+  </form>
+  <div class="form-success" style="max-width:560px;margin:16px auto 0">Listo. Abriendo el moodboard ahora mismo…</div>
+  <p class="cta-note">Sin spam. Solo el recurso y novedades de Sophya.</p>
+</section>
+
+<footer>
+  <div class="ft-logo">sophya</div>
+  <span class="ft-note">Diseño visual completo para bodas</span>
+</footer>
+
+<script>
+(function(){
+  var forms = document.querySelectorAll('.signup-form');
+  forms.forEach(function(form){
+    form.addEventListener('submit', function(e){
+      var email = form.querySelector('input[type="email"]');
+      if(!email || !email.value) return;
+      e.preventDefault();
+      form.removeAttribute('target');
+      var btn = form.querySelector('button[type="submit"]');
+      if(btn){ btn.disabled = true; btn.textContent = 'Un momento…'; }
+      var success = form.parentElement.querySelector('.form-success');
+      var go = function(){
+        if(success){ form.style.display='none'; success.style.display='block'; }
+        setTimeout(function(){ window.location.href = 'sophya-moodboard.html'; }, 1200);
+      };
+      fetch(form.action, { method:'POST', mode:'no-cors', body:new FormData(form) })
+        .then(go).catch(go);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
