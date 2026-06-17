@@ -260,6 +260,53 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
 .pcap{display:flex;align-items:center;gap:10px;background:var(--sophya-crema);color:var(--sophya-teal);padding:13px 28px;border-radius:var(--r-base);border:none;font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 20px rgba(14,75,79,.3)}
 .pcap:hover{background:var(--sophya-white)}
 
+/* TEXTO LIBRE */
+.ctxt-wrap{background:transparent;padding:0;min-width:80px}
+.ctxt{font-family:var(--font-serif);font-size:22px;font-weight:300;color:var(--sophya-teal);outline:none;min-width:60px;min-height:1.4em;word-break:break-word;white-space:pre-wrap;line-height:1.4;cursor:text}
+.ctxt:empty:before{content:'Texto...';color:var(--sophya-cobre);opacity:0.4;font-style:italic;pointer-events:none}
+.ibtn.on{background:var(--sophya-teal)!important;color:var(--sophya-crema)!important;border-color:var(--sophya-teal)!important}
+
+/* SELECTOR MODO IMAGEN */
+#img-mode-pop{position:fixed;bottom:78px;z-index:300;background:var(--sophya-white);border:1px solid rgba(14,75,79,.15);border-radius:var(--r-base);box-shadow:var(--shadow-lift);display:none;flex-direction:column;gap:0;overflow:hidden;min-width:170px}
+#img-mode-pop.open{display:flex}
+.imp-btn{background:transparent;border:none;padding:10px 16px;font-family:var(--font-sans);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--sophya-teal);cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px}
+.imp-btn:hover{background:var(--sophya-crema)}
+.imp-btn+.imp-btn{border-top:1px solid rgba(14,75,79,.08)}
+
+/* DETALLES DE BODA mejorado */
+.cwed{background:var(--sophya-white);padding:16px 18px 18px;box-shadow:var(--shadow-lift);width:250px;border-left:2px solid var(--sophya-cobre);overflow:visible}
+.cw-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(14,75,79,.07);min-height:36px}
+.cw-row:last-child{border-bottom:none}
+.cw-ico{font-size:12px;color:var(--sophya-cobre);flex-shrink:0;width:16px;text-align:center;margin-top:2px}
+.cw-lbl{font-size:8px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--sophya-cobre);flex-shrink:0;white-space:nowrap;margin-top:4px;min-width:60px}
+.cw-val{font-family:var(--font-serif);font-size:15px;font-style:italic;color:var(--sophya-teal);outline:none;flex:1;min-width:0;cursor:text;padding:1px 4px;border-radius:1px;transition:background var(--dur-fast)}
+.cw-val:hover{background:rgba(178,124,82,.07)}
+.cw-val:focus{background:rgba(178,124,82,.1);outline:none}
+.cw-val:empty::before{content:'Escribe aquí';color:var(--sophya-cobre);opacity:.4;pointer-events:none;font-size:13px}
+.cw-horario{display:flex;gap:5px;flex:1;flex-wrap:wrap}
+.cwh{font-size:9px;font-weight:500;letter-spacing:.1em;padding:4px 9px;border:1px solid rgba(14,75,79,.2);border-radius:1px;cursor:pointer;color:var(--sophya-teal);transition:all var(--dur-fast) var(--ease-quiet);text-transform:uppercase}
+.cwh:hover,.cwh.sel{background:var(--sophya-teal);color:var(--sophya-crema);border-color:var(--sophya-teal)}
+
+/* COLOR PALETA selección */
+.pdot{width:34px;height:34px;border-radius:var(--r-base);cursor:pointer;border:3px solid transparent;position:relative;flex-shrink:0;transition:transform .15s,box-shadow .15s}
+.pdot:hover{transform:scale(1.1)}
+.pdot.sel{box-shadow:0 0 0 2px var(--sophya-white),0 0 0 4px var(--sophya-teal);border-color:transparent}
+.pdot.sel::after{display:none}
+
+/* CAPTURE — aplana sombras para exportar */
+#canvas.capturing .bi .ii{box-shadow:2px 2px 8px rgba(0,0,0,.18)!important}
+#canvas.capturing .cpol{box-shadow:2px 2px 8px rgba(0,0,0,.18)!important}
+#canvas.capturing .csw{box-shadow:2px 2px 8px rgba(0,0,0,.18)!important}
+#canvas.capturing .cnote{box-shadow:2px 2px 8px rgba(0,0,0,.18)!important}
+#canvas.capturing .cwed{box-shadow:2px 2px 8px rgba(0,0,0,.18)!important}
+
+/* CTA en modal compartir */
+.scta{margin-top:18px;padding:14px 16px;background:var(--sophya-crema);border-radius:var(--r-base);border-left:2px solid var(--sophya-cobre);text-align:center}
+.scta-tit{font-family:var(--font-serif);font-size:15px;font-style:italic;color:var(--sophya-teal);margin-bottom:6px}
+.scta-sub{font-size:10px;color:var(--muted);letter-spacing:.06em;margin-bottom:10px}
+.scta-btn{display:inline-block;padding:9px 20px;background:var(--sophya-teal);color:var(--sophya-crema);border-radius:var(--r-base);font-family:var(--font-sans);font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background var(--dur)}
+.scta-btn:hover{background:var(--sophya-teal-deep)}
+
 /* TOAST */
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--sophya-teal);color:var(--sophya-crema);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:8px 22px;border-radius:var(--r-base);opacity:0;transition:opacity var(--dur) var(--ease-quiet);pointer-events:none;z-index:300}
 #toast.show{opacity:1}
@@ -286,6 +333,7 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
   <div class="logo">s<em>ophya</em></div>
   <div id="couple-title" contenteditable="true" spellcheck="false"></div>
   <div class="hright">
+    <button class="btn-g" id="btn-save">&#9744; Guardar</button>
     <button class="btn-g" id="btn-clear">&#10022; Limpiar</button>
     <button class="btn-g" id="btn-guia">&#9998; Guía de estilo</button>
     <button class="btn-g" id="btn-photo">&#9723; Modo foto</button>
@@ -310,6 +358,7 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
   <button class="tbtn" id="tbtn-img" title="Imagen">&#9635;</button>
   <button class="tbtn" id="tbtn-sw" title="Color swatch">&#9680;</button>
   <button class="tbtn" id="tbtn-note" title="Nota">&#8801;</button>
+  <button class="tbtn" id="tbtn-txt" title="Texto">T</button>
   <button class="tbtn" id="tbtn-tag" title="Detalles de boda">&#9672;</button>
   <div class="tsep"></div>
   <button class="tbtn" id="tbtn-flores" title="Flores">&#10047;</button>
@@ -375,6 +424,12 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
   </div>
 </div>
 
+<!-- SELECTOR MODO IMAGEN -->
+<div id="img-mode-pop">
+  <button class="imp-btn" id="imp-pol">&#9635; Con marco polaroid</button>
+  <button class="imp-btn" id="imp-free">&#9724; Solo imagen</button>
+</div>
+
 <!-- TOAST -->
 <div id="toast"></div>
 
@@ -432,11 +487,12 @@ var RES_SVG = '<svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 10L10
 
 // ---- INICIO ----
 document.getElementById('mcta-btn').addEventListener('click', function(){
-  var a = document.getElementById('n1').value.trim() || 'Maria';
-  var b = document.getElementById('n2').value.trim() || 'Juan';
+  var a = document.getElementById('n1').value.trim() || 'Nombre 1';
+  var b = document.getElementById('n2').value.trim() || 'Nombre 2';
   coupleA = a; coupleB = b;
   document.getElementById('couple-title').textContent = a + ' & ' + b;
   document.getElementById('modal').style.display = 'none';
+  seed();
 });
 document.getElementById('n1').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('mcta-btn').click(); });
 document.getElementById('n2').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('mcta-btn').click(); });
@@ -507,7 +563,7 @@ function addResHandle(d){
 
 // ---- TIPOS ----
 function addPolaroid(src, caption, x, y){
-  var d = mkItem(x, y, 210);
+  var d = mkItem(x, y, 210); d.dataset.type='polaroid';
   var bar = d.querySelector('.ibar');
   var frameBtn = document.createElement('button');
   frameBtn.className = 'ibtn'; frameBtn.title = 'Marco';
@@ -567,7 +623,7 @@ function replacePh(ph){
 }
 
 function addSwatchAt(hex, name, x, y){
-  var d = mkItem(x, y, 170);
+  var d = mkItem(x, y, 170); d.dataset.type='swatch';
   var inner = document.createElement('div');
   inner.className = 'ii';
   var sw = document.createElement('div');
@@ -607,7 +663,7 @@ function addSwatchAt(hex, name, x, y){
 }
 
 function addNoteAt(txt, x, y){
-  var d = mkItem(x, y, 210);
+  var d = mkItem(x, y, 210); d.dataset.type='note';
   var inner = document.createElement('div');
   inner.className = 'ii';
   var note = document.createElement('div');
@@ -626,7 +682,7 @@ function addNoteAt(txt, x, y){
 }
 
 function addGuideNote(text, x, y){
-  var d = mkItem(x, y, 240);
+  var d = mkItem(x, y, 240); d.dataset.type='guidenote';
   var inner = document.createElement('div'); inner.className = 'ii';
   var card = document.createElement('div'); card.className = 'cnote cguide';
   var sections = text.split('\n\n');
@@ -652,7 +708,7 @@ function addGuideNote(text, x, y){
 }
 
 function addTagAt(icon, label, value, x, y){
-  var d = mkItem(x, y);
+  var d = mkItem(x, y); d.dataset.type='tag';
   var inner = document.createElement('div');
   inner.className = 'ii';
   var tag = document.createElement('div');
@@ -679,7 +735,7 @@ function addTagAt(icon, label, value, x, y){
 }
 
 function addHeadline(x, y){
-  var d = mkItem(x, y);
+  var d = mkItem(x, y); d.dataset.type='headline';
   var inner = document.createElement('div');
   inner.className = 'ii';
   var hl = document.createElement('div');
@@ -689,6 +745,64 @@ function addHeadline(x, y){
   hl.innerHTML = coupleA + '<br>&amp; ' + coupleB;
   inner.appendChild(hl);
   d.appendChild(inner);
+  return d;
+}
+
+function addTextAt(x, y){
+  var d = mkItem(x, y); d.dataset.type='text';
+  var bar = d.querySelector('.ibar');
+  var curSize = 22;
+
+  function mkFmtBtn(html, title){
+    var b = document.createElement('button'); b.className='ibtn'; b.title=title; b.innerHTML=html; return b;
+  }
+  var boldBtn = mkFmtBtn('<b>B</b>','Negrita');
+  var itBtn   = mkFmtBtn('<em>I</em>','Itálica');
+  var szUp    = mkFmtBtn('A+','Aumentar');
+  var szDn    = mkFmtBtn('A−','Reducir');
+  [szDn, szUp, itBtn, boldBtn].forEach(function(b){ bar.insertBefore(b, bar.firstChild); });
+
+  var inner = document.createElement('div'); inner.className = 'ii';
+  var wrap = document.createElement('div'); wrap.className = 'ctxt-wrap';
+  var txt = document.createElement('div'); txt.className = 'ctxt';
+  txt.contentEditable = 'false'; txt.spellcheck = false;
+  txt.textContent = 'Texto libre';
+  txt.style.fontSize = curSize + 'px';
+
+  function enterEdit(){
+    txt.contentEditable = 'true';
+    txt.style.cursor = 'text';
+    d.style.cursor = 'text';
+    txt.focus();
+    var r = document.createRange(); r.selectNodeContents(txt);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  function exitEdit(){
+    txt.contentEditable = 'false';
+    txt.style.cursor = '';
+    d.style.cursor = '';
+    window.getSelection().removeAllRanges();
+  }
+  txt.addEventListener('dblclick', function(e){ e.stopPropagation(); enterEdit(); });
+  txt.addEventListener('mousedown', function(e){ if(txt.contentEditable==='true') e.stopPropagation(); });
+  txt.addEventListener('blur', function(){ exitEdit(); });
+  txt.addEventListener('keydown', function(e){ if(e.key==='Escape'){ exitEdit(); e.preventDefault(); } });
+
+  boldBtn.addEventListener('click', function(){
+    var on = boldBtn.classList.toggle('on');
+    txt.style.fontWeight = on ? '700' : '300';
+  });
+  itBtn.addEventListener('click', function(){
+    var on = itBtn.classList.toggle('on');
+    txt.style.fontStyle = on ? 'italic' : 'normal';
+  });
+  szUp.addEventListener('click', function(){ curSize = Math.min(96, curSize+4); txt.style.fontSize = curSize+'px'; });
+  szDn.addEventListener('click', function(){ curSize = Math.max(10, curSize-4); txt.style.fontSize = curSize+'px'; });
+
+  wrap.appendChild(txt); inner.appendChild(wrap); d.appendChild(inner);
+  addRotHandle(d); addResHandle(d);
+  // Entrar en edición automáticamente al crear
+  setTimeout(function(){ enterEdit(); }, 60);
   return d;
 }
 
@@ -711,7 +825,7 @@ function makeWRow(ico, lbl, val, editable){
 }
 
 function addWeddingCard(x, y){
-  var d = mkItem(x, y, 230);
+  var d = mkItem(x, y, 230); d.dataset.type='wedcard';
   var inner = document.createElement('div'); inner.className = 'ii';
   inner.innerHTML = PIN_SVG;
   var card = document.createElement('div'); card.className = 'cwed';
@@ -894,11 +1008,32 @@ function filePickMany(cb){
 }
 
 // ---- TOOLBAR BUTTONS ----
-document.getElementById('tbtn-img').addEventListener('click', function(){
-  filePickMany(function(src,i){ var c=center(); addPolaroid(src,'',c[0]+i*25,c[1]+i*18); });
-});
+// ---- PICKER MODO IMAGEN ----
+(function(){
+  var pop = document.getElementById('img-mode-pop');
+  var btn = document.getElementById('tbtn-img');
+  function closePop(){ pop.classList.remove('open'); }
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(pop.classList.contains('open')){ closePop(); return; }
+    var rect = btn.getBoundingClientRect();
+    pop.style.left = (rect.left - 10) + 'px';
+    pop.classList.add('open');
+  });
+  document.getElementById('imp-pol').addEventListener('click', function(){
+    closePop();
+    filePickMany(function(src,i){ var c=center(); addPolaroid(src,'',c[0]+i*25,c[1]+i*18); });
+  });
+  document.getElementById('imp-free').addEventListener('click', function(){
+    closePop();
+    filePickMany(function(src,i){ var c=center(); var d=addPolaroid(src,'',c[0]+i*25,c[1]+i*18); d.classList.add('frameless'); });
+  });
+  document.addEventListener('click', function(){ closePop(); });
+})();
+
 document.getElementById('tbtn-sw').addEventListener('click', function(){ var c=center(); addSwatchAt('#B27C52','Cobre',c[0],c[1]); });
 document.getElementById('tbtn-note').addEventListener('click', function(){ var c=center(); addNoteAt('',c[0],c[1]); });
+document.getElementById('tbtn-txt').addEventListener('click', function(){ var c=center(); addTextAt(c[0],c[1]); });
 document.getElementById('tbtn-tag').addEventListener('click', function(){ var c=center(); addWeddingCard(c[0],c[1]); });
 document.getElementById('tbtn-del').addEventListener('click', function(){ if(selItem){selItem.remove();selItem=null;} });
 document.getElementById('btn-clear').addEventListener('click', function(){
@@ -933,7 +1068,7 @@ function makeDZ(body, dzId, capId, capPlaceholder){
   var sec = document.createElement('div');
   sec.className = 'psec';
   var div = document.createElement('div'); div.className = 'sdiv'; body.appendChild(div);
-  var lbl = document.createElement('div'); lbl.className = 'slbl'; lbl.textContent = 'Anadir foto'; sec.appendChild(lbl);
+  var lbl = document.createElement('div'); lbl.className = 'slbl'; lbl.textContent = 'Añadir foto'; sec.appendChild(lbl);
   var dz = document.createElement('div'); dz.className = 'dz'; dz.id = dzId;
   dz.innerHTML = CAM_SVG + '<span>Arrastra o haz clic</span><span class="dzs">JPG, PNG, WEBP</span>';
   var capInp = document.createElement('input'); capInp.className = 'pi'; capInp.id = capId; capInp.placeholder = capPlaceholder;
@@ -943,7 +1078,7 @@ function makeDZ(body, dzId, capId, capPlaceholder){
       var cap = capInp.value.trim();
       var c = center();
       addPolaroid(src, cap, c[0], c[1]);
-      toast('Imagen anadida');
+      toast('Imagen añadida');
     });
   }
   dz.addEventListener('click', pick);
@@ -958,7 +1093,7 @@ function makeDZ(body, dzId, capId, capPlaceholder){
     if(!file) return;
     var cap = capInp.value.trim();
     var r = new FileReader();
-    r.onload = function(ev){ var c=center(); addPolaroid(ev.target.result,cap,c[0],c[1]); toast('Imagen anadida'); };
+    r.onload = function(ev){ var c=center(); addPolaroid(ev.target.result,cap,c[0],c[1]); toast('Imagen añadida'); };
     r.readAsDataURL(file);
   });
   sec.appendChild(dz);
@@ -976,7 +1111,7 @@ function renderFlores(body){
     c.addEventListener('click',function(){ c.classList.toggle('sel'); }); chips.appendChild(c);
   });
   sec1.appendChild(chips);
-  var btn1=document.createElement('button'); btn1.className='padd'; btn1.textContent='Anadir al moodboard';
+  var btn1=document.createElement('button'); btn1.className='padd'; btn1.textContent='Añadir al moodboard';
   btn1.style.marginTop='8px';
   btn1.addEventListener('click',function(){
     var sel=document.querySelectorAll('#flc .chip.sel');
@@ -988,7 +1123,7 @@ function renderFlores(body){
   var sec2=document.createElement('div'); sec2.className='psec';
   var lbl2=document.createElement('div'); lbl2.className='slbl'; lbl2.textContent='Otra flor'; sec2.appendChild(lbl2);
   var inp=document.createElement('input'); inp.className='pi'; inp.placeholder='Nombre de la flor...'; inp.id='flor-txt'; sec2.appendChild(inp);
-  var btn2=document.createElement('button'); btn2.className='padd'; btn2.textContent='Anadir';
+  var btn2=document.createElement('button'); btn2.className='padd'; btn2.textContent='Añadir';
   btn2.addEventListener('click',function(){ var v=inp.value.trim(); if(v){ addTagAt('🌸','Flor',v,...rndArr()); inp.value=''; } });
   sec2.appendChild(btn2); body.appendChild(sec2);
 
@@ -1002,7 +1137,7 @@ function renderLugar(body){
     var lbl=document.createElement('div'); lbl.className='slbl'; lbl.textContent=label; sec.appendChild(lbl);
     var inp=document.createElement('input'); inp.className='pi'; inp.placeholder='Nombre del espacio...'; sec.appendChild(inp);
     var ico = idx===0 ? '✦' : '◆';
-    var btn=document.createElement('button'); btn.className='padd'; btn.textContent='Anadir';
+    var btn=document.createElement('button'); btn.className='padd'; btn.textContent='Añadir';
     btn.addEventListener('click',function(){ var v=inp.value.trim(); if(v){ addTagAt(ico,label,v,...rndArr()); inp.value=''; } });
     sec.appendChild(btn); body.appendChild(sec);
   });
@@ -1032,7 +1167,7 @@ function renderColores(body){
   pinp.addEventListener('input',function(){ sw.style.background=pinp.value; hx.textContent=pinp.value; });
   sec1.appendChild(row);
   var ni=document.createElement('input'); ni.className='pi'; ni.id='color-nm'; ni.value='Cobre'; ni.style.cssText='font-family:var(--font-serif);font-style:italic;font-size:15px;color:var(--sophya-teal)'; sec1.appendChild(ni);
-  var btn=document.createElement('button'); btn.className='padd'; btn.textContent='Anadir swatch al moodboard';
+  var btn=document.createElement('button'); btn.className='padd'; btn.textContent='Añadir swatch al moodboard';
   btn.addEventListener('click',function(){
     var hex=pinp.value, name=ni.value.trim()||hex;
     addSwatchAt(hex,name,...rndArr());
@@ -1067,7 +1202,7 @@ function renderEstilo(body){
   var sec2=document.createElement('div'); sec2.className='psec';
   var lbl2=document.createElement('div'); lbl2.className='slbl'; lbl2.textContent='Descripcion libre'; sec2.appendChild(lbl2);
   var ta=document.createElement('textarea'); ta.className='pi'; ta.placeholder='Describe el estilo que imaginas...'; sec2.appendChild(ta);
-  var btn2=document.createElement('button'); btn2.className='padd'; btn2.textContent='Anadir nota';
+  var btn2=document.createElement('button'); btn2.className='padd'; btn2.textContent='Añadir nota';
   btn2.addEventListener('click',function(){ var v=ta.value.trim(); if(v){ addNoteAt(v,...rndArr()); ta.value=''; } });
   sec2.appendChild(btn2); body.appendChild(sec2);
   makeDZ(body,'dz-estilo','cap-estilo','Pie de foto de inspiracion');
@@ -1076,7 +1211,7 @@ function renderEstilo(body){
   var lbl3=document.createElement('div'); lbl3.className='slbl'; lbl3.textContent='Datos de la boda'; sec3.appendChild(lbl3);
   var fi=document.createElement('input'); fi.className='pi'; fi.placeholder='Fecha'; sec3.appendChild(fi);
   var li=document.createElement('input'); li.className='pi'; li.placeholder='Ciudad o localizacion'; sec3.appendChild(li);
-  var btn3=document.createElement('button'); btn3.className='padd'; btn3.textContent='Anadir al moodboard';
+  var btn3=document.createElement('button'); btn3.className='padd'; btn3.textContent='Añadir al moodboard';
   btn3.addEventListener('click',function(){
     if(fi.value.trim()) addTagAt('◈','Fecha',fi.value.trim(),...rndArr());
     if(li.value.trim()) addTagAt('◉','Lugar',li.value.trim(),...rndArr());
@@ -1163,36 +1298,40 @@ function stampWatermark(dataUrl, cb){
   var img = new Image();
   img.onload = function(){
     var W = img.width, H = img.height;
-    var barH = Math.max(72, Math.round(H * 0.054));
+    var barH = Math.max(72, Math.round(H * 0.058));
     var oc = document.createElement('canvas');
     oc.width = W; oc.height = H + barH;
     var ctx = oc.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    // Bar
     ctx.fillStyle = '#093336';
     ctx.fillRect(0, H, W, barH);
-    // Thin cobre line
     ctx.fillStyle = '#B27C52';
-    ctx.globalAlpha = 0.28;
+    ctx.globalAlpha = 0.35;
     ctx.fillRect(0, H, W, 2);
     ctx.globalAlpha = 1;
-    var pad = Math.round(barH * 0.52);
-    var midY = H + barH * 0.5;
-    // Couple names — left, serif italic
+    var pad = Math.round(barH * 0.44);
+    var midY = H + barH * 0.42;
+    var urlY = H + barH * 0.76;
     var names = (document.getElementById('couple-title').textContent || '').trim();
-    var fsNames = Math.round(barH * 0.42);
+    var fsNames = Math.round(barH * 0.40);
     ctx.font = 'italic 300 ' + fsNames + 'px "Cormorant Garamond",Georgia,serif';
     ctx.fillStyle = '#F6EFE6';
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'left';
     ctx.fillText(names || 'Sophya Moodboard', pad, midY);
-    // Logo — right, sans uppercase
-    var fsLogo = Math.round(barH * 0.25);
+    var fsLogo = Math.round(barH * 0.24);
     try { ctx.letterSpacing = '0.16em'; } catch(e){}
     ctx.font = '500 ' + fsLogo + 'px "DM Sans",Arial,sans-serif';
     ctx.fillStyle = '#B27C52';
     ctx.textAlign = 'right';
     ctx.fillText('SOPHYA', W - pad, midY);
+    var fsUrl = Math.round(barH * 0.18);
+    ctx.font = '300 ' + fsUrl + 'px "DM Sans",Arial,sans-serif';
+    ctx.fillStyle = '#F6EFE6';
+    ctx.globalAlpha = 0.4;
+    ctx.textAlign = 'right';
+    ctx.fillText('sophya-estudio.vercel.app', W - pad, urlY);
+    ctx.globalAlpha = 1;
     cb(oc.toDataURL('image/png'));
   };
   img.src = dataUrl;
@@ -1200,11 +1339,21 @@ function stampWatermark(dataUrl, cb){
 
 // ---- CAPTURA ----
 function captureBoard(cb){
-  html2canvas(canvas,{
-    scale:2, useCORS:true, allowTaint:true,
-    backgroundColor:'#EDE2DB', logging:false,
-    windowWidth:window.innerWidth, windowHeight:window.innerHeight
-  }).then(function(c){ stampWatermark(c.toDataURL('image/png'), cb); }).catch(function(e){ console.error(e); cb(null); });
+  canvas.classList.add('capturing');
+  // pequeña pausa para que el DOM aplique los estilos de captura
+  setTimeout(function(){
+    html2canvas(canvas,{
+      scale:1.5, useCORS:true, allowTaint:true,
+      backgroundColor:'#E6D7B8', logging:false,
+      windowWidth:window.innerWidth, windowHeight:window.innerHeight
+    }).then(function(c){
+      canvas.classList.remove('capturing');
+      stampWatermark(c.toDataURL('image/png'), cb);
+    }).catch(function(e){
+      canvas.classList.remove('capturing');
+      console.error(e); cb(null);
+    });
+  }, 80);
 }
 
 function dataUrlToBlob(dataUrl){
@@ -1229,19 +1378,25 @@ function showInst(msg){
 
 // ---- COMPARTIR ----
 document.getElementById('btn-share-open').addEventListener('click', function(){
-  var btn=document.getElementById('btn-share-open');
-  btn.textContent='Capturando...'; btn.disabled=true;
+  var btn = document.getElementById('btn-share-open');
+  var modal = document.getElementById('share-modal');
+  var prev = document.getElementById('share-prev');
+  var sub = document.getElementById('share-sub');
+  // Abrir modal inmediatamente con estado de carga
+  prev.style.display = 'none';
+  sub.textContent = 'Generando imagen…';
+  document.getElementById('share-inst').style.display = 'none';
+  modal.classList.add('open');
+  btn.disabled = true;
   captureBoard(function(dataUrl){
     window._snap = dataUrl;
     if(dataUrl){
-      var prev=document.getElementById('share-prev');
-      prev.src=dataUrl; prev.style.display='block';
+      prev.src = dataUrl; prev.style.display = 'block';
+      sub.textContent = 'Captura lista. Elige cómo compartirla.';
+    } else {
+      sub.textContent = 'Error al generar la imagen. Inténtalo de nuevo.';
     }
-    var nat=document.getElementById('btn-native');
-    if(navigator.share) nat.style.display='flex';
-    document.getElementById('share-inst').style.display='none';
-    document.getElementById('share-modal').classList.add('open');
-    btn.textContent='↗ Compartir'; btn.disabled=false;
+    btn.disabled = false;
   });
 });
 
@@ -1375,6 +1530,131 @@ document.getElementById('btn-capture').addEventListener('click', function(){
     hint.style.opacity = board.children.length === 0 ? '1' : '0';
   });
   obs.observe(board, {childList:true});
+})();
+
+// ---- GUARDAR / RESTAURAR ----
+var SAVE_KEY = 'sophya-board-v1';
+
+function serializeBoard(){
+  var items = [];
+  board.querySelectorAll('.bi').forEach(function(el){
+    var type = el.dataset.type;
+    var obj = {
+      type: type,
+      x: parseFloat(el.style.left)||0,
+      y: parseFloat(el.style.top)||0,
+      z: parseInt(el.style.zIndex)||10,
+      w: parseFloat(el.style.width)||0,
+      angle: parseFloat(el.dataset.angle)||0,
+      frameless: el.classList.contains('frameless')
+    };
+    if(type==='note'){
+      var ta = el.querySelector('textarea'); obj.text = ta ? ta.value : '';
+    } else if(type==='swatch'){
+      var inp = el.querySelector('input[type=color]'); var nm = el.querySelector('.sw-nm');
+      obj.hex = inp ? inp.value : '#B27C52'; obj.name = nm ? nm.textContent : '';
+    } else if(type==='tag'){
+      var icon = el.querySelector('.ti'); var lbl = el.querySelector('.tl'); var val = el.querySelector('.tv');
+      obj.icon = icon ? icon.textContent : '◈';
+      obj.label = lbl ? lbl.textContent : '';
+      obj.value = val ? val.textContent : '';
+    } else if(type==='headline'){
+      var hl = el.querySelector('.chl'); obj.html = hl ? hl.innerHTML : '';
+    } else if(type==='text'){
+      var ct = el.querySelector('.ctxt');
+      obj.text = ct ? ct.textContent : '';
+      obj.fontSize = ct ? ct.style.fontSize : '22px';
+      obj.fontWeight = ct ? ct.style.fontWeight : '300';
+      obj.fontStyle = ct ? ct.style.fontStyle : 'normal';
+    } else if(type==='guidenote'){
+      var bodies = el.querySelectorAll('.gn-body'); var tits = el.querySelectorAll('.gn-tit');
+      obj.sections = Array.prototype.map.call(tits, function(t,i){
+        return t.textContent + '\n' + (bodies[i] ? bodies[i].textContent : '');
+      });
+    } else if(type==='wedcard'){
+      var vals = el.querySelectorAll('.cw-val');
+      obj.wvals = Array.prototype.map.call(vals, function(v){ return v.textContent; });
+      var selH = el.querySelector('.cwh.sel'); obj.horario = selH ? selH.textContent : '';
+    } else if(type==='polaroid'){
+      var img = el.querySelector('.pol-img'); var cap = el.querySelector('.pol-cap');
+      obj.src = (img && img.src && img.src.startsWith('data:')) ? img.src : null;
+      obj.caption = cap ? cap.textContent : '';
+    }
+    items.push(obj);
+  });
+  return {
+    items: items,
+    coupleTitle: document.getElementById('couple-title').textContent,
+    tx: tx,
+    zIdx: zIdx
+  };
+}
+
+function restoreBoard(data){
+  board.innerHTML = ''; zIdx = data.zIdx || 10;
+  if(data.tx){ tx.x=data.tx.x||0; tx.y=data.tx.y||0; tx.s=data.tx.s||1; applyTx(); }
+  document.getElementById('couple-title').textContent = data.coupleTitle || '';
+  (data.items||[]).forEach(function(obj){
+    var d;
+    if(obj.type==='note'){ d=addNoteAt(obj.text, obj.x, obj.y); }
+    else if(obj.type==='swatch'){ d=addSwatchAt(obj.hex, obj.name, obj.x, obj.y); }
+    else if(obj.type==='tag'){ d=addTagAt(obj.icon, obj.label, obj.value, obj.x, obj.y); }
+    else if(obj.type==='headline'){ d=addHeadline(obj.x, obj.y); var hl=d.querySelector('.chl'); if(hl&&obj.html) hl.innerHTML=obj.html; }
+    else if(obj.type==='text'){
+      d=addTextAt(obj.x, obj.y);
+      var ct=d.querySelector('.ctxt');
+      if(ct){ ct.textContent=obj.text||''; ct.style.fontSize=obj.fontSize||'22px'; ct.style.fontWeight=obj.fontWeight||'300'; ct.style.fontStyle=obj.fontStyle||'normal'; }
+    }
+    else if(obj.type==='guidenote'){ var text=(obj.sections||[]).join('\n\n'); d=addGuideNote(text, obj.x, obj.y); }
+    else if(obj.type==='wedcard'){
+      d=addWeddingCard(obj.x, obj.y);
+      if(obj.wvals){ var vals=d.querySelectorAll('.cw-val'); obj.wvals.forEach(function(v,i){ if(vals[i]) vals[i].textContent=v; }); }
+      if(obj.horario){ d.querySelectorAll('.cwh').forEach(function(h){ if(h.textContent===obj.horario) h.classList.add('sel'); }); }
+    }
+    else if(obj.type==='polaroid'){
+      d=addPolaroid(obj.src||null, obj.caption, obj.x, obj.y);
+      if(obj.frameless) d.classList.add('frameless');
+    }
+    if(d){
+      d.style.zIndex = obj.z || ++zIdx;
+      if(obj.w) d.style.width = obj.w + 'px';
+      if(obj.angle){ d.dataset.angle=obj.angle; d.style.transform='rotate('+obj.angle+'deg)'; }
+    }
+  });
+}
+
+document.getElementById('btn-save').addEventListener('click', function(){
+  try {
+    var data = serializeBoard();
+    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+    var btn = document.getElementById('btn-save');
+    btn.textContent = '✓ Guardado';
+    setTimeout(function(){ btn.innerHTML='&#9744; Guardar'; }, 2000);
+    toast('Moodboard guardado');
+  } catch(e){ toast('Error al guardar'); }
+});
+
+// Ofrecer restaurar si hay sesión guardada
+(function(){
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem(SAVE_KEY)); } catch(e){}
+  if(!saved || !saved.items || !saved.items.length) return;
+  // Mostrar opción de restaurar en el modal inicial
+  var mbox = document.querySelector('.mbox');
+  var restore = document.createElement('div');
+  restore.style.cssText='margin-top:16px;padding:12px 14px;background:rgba(14,75,79,.06);border-radius:2px;border-left:2px solid var(--sophya-cobre)';
+  restore.innerHTML='<div style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sophya-teal);margin-bottom:8px">Sesión guardada</div>'
+    +'<div style="font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;color:var(--sophya-cobre);margin-bottom:10px">'+(saved.coupleTitle||'Moodboard anterior')+'</div>'
+    +'<button id="btn-restore" style="background:var(--sophya-teal);color:var(--sophya-crema);border:none;padding:8px 18px;border-radius:2px;font-family:\'DM Sans\',sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;margin-right:8px">Recuperar &rarr;</button>'
+    +'<button id="btn-restore-skip" style="background:none;border:none;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sophya-cobre);cursor:pointer;opacity:.7">Empezar nuevo</button>';
+  mbox.appendChild(restore);
+  document.getElementById('btn-restore').addEventListener('click', function(){
+    document.getElementById('modal').style.display='none';
+    restoreBoard(saved);
+  });
+  document.getElementById('btn-restore-skip').addEventListener('click', function(){
+    restore.style.display='none';
+  });
 })();
 
 // ---- TECLADO ----
