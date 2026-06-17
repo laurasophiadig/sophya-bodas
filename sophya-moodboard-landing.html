@@ -160,6 +160,14 @@ input[type=email]::placeholder{color:var(--cobre);opacity:.5;font-style:italic;f
 .soy-body em{font-style:italic;color:var(--teal)}
 @media(max-width:680px){.soy-inner{grid-template-columns:1fr}.soy-img{max-width:240px}.soy-content{text-align:center}}
 
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
 /* FOOTER */
 footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(230,215,184,.1)}
 .ft-logo{font-family:var(--font-serif);font-size:18px;font-weight:300;letter-spacing:.1em;color:var(--arena);text-transform:lowercase}
@@ -218,27 +226,27 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 </section>
 
 <section class="includes">
-  <div class="inc-header">
+  <div class="inc-header reveal">
     <div class="inc-eyebrow">Qué incluye</div>
     <h2 class="inc-title">Todo lo que necesitáis<br><em>antes de la primera reunión.</em></h2>
   </div>
   <div class="inc-cards">
-    <div class="inc-card">
+    <div class="inc-card reveal reveal-delay-1">
       <div class="inc-n">01</div>
       <div class="inc-card-t">Tablero visual propio</div>
       <p class="inc-card-d">Arrastra fotos, colores, flores y localizaciones hasta que todo empiece a tener sentido en un solo lugar.</p>
     </div>
-    <div class="inc-card">
+    <div class="inc-card reveal reveal-delay-2">
       <div class="inc-n">02</div>
       <div class="inc-card-t">Guía de estilo</div>
       <p class="inc-card-d">Cuatro preguntas que concretan lo que ya sentís y aún no sabíais nombrar. Vuestra imagen, con palabras.</p>
     </div>
-    <div class="inc-card">
+    <div class="inc-card reveal reveal-delay-3">
       <div class="inc-n">03</div>
       <div class="inc-card-t">Descarga en PNG</div>
       <p class="inc-card-d">Lo lleváis a cada cita. La florista, el fotógrafo, quien diseña: todos parten de lo mismo.</p>
     </div>
-    <div class="inc-card">
+    <div class="inc-card reveal reveal-delay-4">
       <div class="inc-n">04</div>
       <div class="inc-card-t">Sin instalar nada</div>
       <p class="inc-card-d">Funciona desde cualquier dispositivo. Abrís el link y empezáis. Así de directo.</p>
@@ -248,20 +256,20 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 
 <section class="for-who">
   <div class="for-inner">
-    <div>
+    <div class="reveal">
       <div class="for-quote-lbl">Para quién es esto</div>
       <p class="for-quote">"Sabemos lo que nos gusta. Solo necesitábamos verlo junto, completo, antes de empezar."</p>
     </div>
     <div class="for-items">
-      <div class="for-item">
+      <div class="for-item reveal reveal-delay-1">
         <div class="for-item-t">Tenéis referencias dispersas</div>
         <p class="for-item-d">Guardadas en carpetas, Pinterest, fotos de móvil. Sin forma de verlas juntas.</p>
       </div>
-      <div class="for-item">
+      <div class="for-item reveal reveal-delay-2">
         <div class="for-item-t">Queréis algo vuestro</div>
         <p class="for-item-d">No una plantilla. Que la boda se sienta como vosotros, no como el catálogo de siempre.</p>
       </div>
-      <div class="for-item">
+      <div class="for-item reveal reveal-delay-3">
         <div class="for-item-t">Cuidáis cada detalle</div>
         <p class="for-item-d">Sois parejas con criterio. El diseño no es un extra: es parte de cómo celebráis.</p>
       </div>
@@ -270,22 +278,22 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 </section>
 
 <section class="how">
-  <div class="sec-head">
+  <div class="sec-head reveal">
     <div class="sec-eyebrow">Cómo funciona</div>
     <h2 class="sec-title">Tres pasos. <em>Diez minutos.</em></h2>
   </div>
   <div class="steps">
-    <div class="step">
+    <div class="step reveal reveal-delay-1">
       <div class="step-num">01</div>
       <div class="step-t">Reúne</div>
       <p class="step-d">Sube fotos, colores y referencias. Arrástralo todo a un mismo tablero hasta que empiece a tener sentido.</p>
     </div>
-    <div class="step">
+    <div class="step reveal reveal-delay-2">
       <div class="step-num">02</div>
       <div class="step-t">Clarifica</div>
       <p class="step-d">Abrid el apartado de guía de estilo. Cuatro preguntas que concretan lo que ya sentís y aún no sabíais nombrar.</p>
     </div>
-    <div class="step">
+    <div class="step reveal reveal-delay-3">
       <div class="step-num">03</div>
       <div class="step-t">Comparte</div>
       <p class="step-d">Llegáis a cada cita con la idea clara y completa. La florista, el fotógrafo, quien diseña—todos parten de lo mismo: vuestra imagen.</p>
@@ -294,14 +302,14 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 </section>
 
 <section class="philo">
-  <p class="philo-q">La imagen de una boda no es la suma de sus partes—es la <span>coherencia</span> entre ellas.</p>
-  <p class="philo-s">El moodboard es donde empieza esa coherencia. Antes de contratar nada, sabéis quiénes sois visualmente.</p>
+  <p class="philo-q reveal">La imagen de una boda no es la suma de sus partes—es la <span>coherencia</span> entre ellas.</p>
+  <p class="philo-s reveal reveal-delay-1">El moodboard es donde empieza esa coherencia. Antes de contratar nada, sabéis quiénes sois visualmente.</p>
 </section>
 
 <section class="soy">
   <div class="soy-inner">
-    <img class="soy-img" src="images/laurasophia-sophya.jpg" alt="Laura Sophia, fundadora de Sophya">
-    <div class="soy-content">
+    <img class="soy-img reveal" src="images/laurasophia-sophya.jpg" alt="Laura Sophia, fundadora de Sophya">
+    <div class="soy-content reveal reveal-delay-2">
       <div class="soy-lbl">Quién está detrás</div>
       <p class="soy-txt">Soy <em>Laura</em>. Diseño la imagen visual completa de bodas en Sophya.</p>
       <p class="soy-body">Creo en las bodas que se parecen a quienes las celebran—no a un catálogo. Cada proyecto empieza por entender vuestro estilo y traducirlo, con coherencia, a cada pieza: de la invitación a lo que verán vuestros invitados el día de.</p>
@@ -312,8 +320,8 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 </section>
 
 <section class="cta">
-  <h2 class="cta-t">Vuestro punto de <em>partida.</em></h2>
-  <p class="cta-s">Dejad vuestro email y abrís el moodboard al momento. Es gratis.</p>
+  <h2 class="cta-t reveal">Vuestro punto de <em>partida.</em></h2>
+  <p class="cta-s reveal reveal-delay-1">Dejad vuestro email y abrís el moodboard al momento. Es gratis.</p>
   <form class="signup-form cta-form"
         action="https://app.kit.com/forms/9561184/subscriptions"
         method="POST"
@@ -336,6 +344,14 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 
 <script>
 (function(){
+  // Scroll reveal
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+
   // Checkbox → habilita botón
   document.getElementById('consent-main').addEventListener('change', function(){
     document.getElementById('submit-btn').disabled = !this.checked;
