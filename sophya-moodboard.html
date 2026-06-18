@@ -1360,31 +1360,24 @@ function stampWatermark(dataUrl, cb){
 }
 
 // ---- CAPTURA ----
+var UI_IDS = ['tb','panel','toast','share-modal','photo-ov','img-mode-pop'];
 function captureBoard(cb){
-  // Ocultar UI antes de capturar
-  var hide = ['header','#tb','#panel','#toast','#share-modal','#photo-ov','#img-mode-pop'];
-  var els = hide.map(function(s){ return document.querySelector(s); }).filter(Boolean);
-  els.forEach(function(el){ el.style.visibility='hidden'; });
-  // Quitar outline de selección
   if(selItem) selItem.classList.remove('sel');
-
-  setTimeout(function(){
-    html2canvas(canvas,{
-      scale:1.5,
-      useCORS:true,
-      allowTaint:true,
-      backgroundColor:'#E6D7B8',
-      logging:false
-    }).then(function(c){
-      els.forEach(function(el){ el.style.visibility=''; });
-      if(selItem) selItem.classList.add('sel');
-      stampWatermark(c.toDataURL('image/png'), cb);
-    }).catch(function(e){
-      els.forEach(function(el){ el.style.visibility=''; });
-      if(selItem) selItem.classList.add('sel');
-      console.error(e); cb(null);
-    });
-  }, 60);
+  html2canvas(canvas,{
+    scale:2, useCORS:true, allowTaint:true,
+    backgroundColor:'#E6D7B8', logging:false,
+    windowWidth:window.innerWidth, windowHeight:window.innerHeight,
+    ignoreElements:function(el){
+      return el.tagName==='HEADER' || UI_IDS.indexOf(el.id)>=0;
+    }
+  }).then(function(c){
+    if(selItem) selItem.classList.add('sel');
+    stampWatermark(c.toDataURL('image/png'), cb);
+  }).catch(function(e){
+    if(selItem) selItem.classList.add('sel');
+    console.error('html2canvas error:', e);
+    cb(null);
+  });
 }
 
 function dataUrlToBlob(dataUrl){
@@ -1539,8 +1532,11 @@ document.getElementById('btn-capture').addEventListener('click', function(){
   html2canvas(canvas,{
     x:crop.x, y:crop.y, width:crop.w, height:crop.h,
     scale:2, useCORS:true, allowTaint:true,
-    backgroundColor:'#EDE2DB', logging:false,
-    windowWidth:window.innerWidth, windowHeight:window.innerHeight
+    backgroundColor:'#E6D7B8', logging:false,
+    windowWidth:window.innerWidth, windowHeight:window.innerHeight,
+    ignoreElements:function(el){
+      return el.tagName==='HEADER' || UI_IDS.indexOf(el.id)>=0;
+    }
   }).then(function(c){
     document.getElementById('photo-ov').style.display='';
     stampWatermark(c.toDataURL('image/png'), function(stamped){ doDownload(stamped); });
