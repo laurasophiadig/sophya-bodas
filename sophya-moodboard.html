@@ -1533,7 +1533,10 @@ document.getElementById('btn-capture').addEventListener('click', function(){
   var hint = document.getElementById('empty-hint');
   if(!hint) return;
   var obs = new MutationObserver(function(){
-    hint.style.display = board.children.length === 0 ? 'block' : 'none';
+    if(board.children.length > 0){
+      hint.style.display = 'none';
+      obs.disconnect(); // ya no vuelve aunque limpien
+    }
   });
   obs.observe(board, {childList:true});
 })();
