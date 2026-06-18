@@ -1403,24 +1403,26 @@ function showInst(msg){
 // ---- COMPARTIR ----
 document.getElementById('btn-share-open').addEventListener('click', function(){
   var btn = document.getElementById('btn-share-open');
-  var modal = document.getElementById('share-modal');
-  var prev = document.getElementById('share-prev');
-  var sub = document.getElementById('share-sub');
-  // Abrir modal inmediatamente con estado de carga
-  prev.style.display = 'none';
-  sub.textContent = 'Generando imagen…';
-  document.getElementById('share-inst').style.display = 'none';
-  modal.classList.add('open');
+  if(btn.disabled) return;
   btn.disabled = true;
+  btn.textContent = 'Generando…';
+  // Capturar ANTES de abrir el modal (el backdrop-filter del modal interfiere con html2canvas)
   captureBoard(function(dataUrl){
     window._snap = dataUrl;
+    var modal = document.getElementById('share-modal');
+    var prev = document.getElementById('share-prev');
+    var sub = document.getElementById('share-sub');
+    document.getElementById('share-inst').style.display = 'none';
     if(dataUrl){
       prev.src = dataUrl; prev.style.display = 'block';
       sub.textContent = 'Captura lista. Elige cómo compartirla.';
     } else {
+      prev.style.display = 'none';
       sub.textContent = 'Error al generar la imagen. Inténtalo de nuevo.';
     }
+    modal.classList.add('open');
     btn.disabled = false;
+    btn.innerHTML = '&#8599; Compartir';
   });
 });
 
