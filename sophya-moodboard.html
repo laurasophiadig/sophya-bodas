@@ -261,9 +261,14 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
 .pcap:hover{background:var(--sophya-white)}
 
 /* TEXTO LIBRE */
-.ctxt-wrap{background:transparent;padding:0;min-width:80px}
-.ctxt{font-family:var(--font-serif);font-size:22px;font-weight:300;color:var(--sophya-teal);outline:none;min-width:60px;min-height:1.4em;word-break:break-word;white-space:pre-wrap;line-height:1.4;cursor:text}
+.ctxt-wrap{background:transparent;padding:4px 2px;min-width:80px}
+.ctxt{font-family:var(--font-serif);font-size:22px;font-weight:300;color:var(--sophya-teal);outline:none;min-width:60px;min-height:1.4em;word-break:break-word;white-space:pre-wrap;line-height:1.4;cursor:grab}
+.ctxt.editing{cursor:text}
 .ctxt:empty:before{content:'Texto...';color:var(--sophya-cobre);opacity:0.4;font-style:italic;pointer-events:none}
+/* indicador de hover para texto (no se exporta) */
+.bi:hover .ctxt-wrap{outline:1px dashed rgba(178,124,82,.4);outline-offset:4px}
+.bi.sel .ctxt-wrap{outline:1px dashed rgba(14,75,79,.5);outline-offset:4px}
+.ctxt.editing,.bi:has(.ctxt.editing) .ctxt-wrap{outline:none}
 .ibtn.on{background:var(--sophya-teal)!important;color:var(--sophya-crema)!important;border-color:var(--sophya-teal)!important}
 
 /* SELECTOR MODO IMAGEN */
@@ -333,7 +338,6 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
   <div class="logo">s<em>ophya</em></div>
   <div id="couple-title" contenteditable="true" spellcheck="false"></div>
   <div class="hright">
-    <button class="btn-g" id="btn-save">&#9744; Guardar</button>
     <button class="btn-g" id="btn-clear">&#10022; Limpiar</button>
     <button class="btn-g" id="btn-guia">&#9998; Guía de estilo</button>
     <button class="btn-g" id="btn-photo">&#9723; Modo foto</button>
@@ -386,8 +390,6 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
     <p class="ssub" id="share-sub">Captura lista. Elige como compartirla.</p>
     <div class="sbtns">
       <button class="sbtn sb-dl" id="btn-dl-png"><div class="sico">&#11015;</div><div class="slb"><div>Descargar imagen PNG</div><div class="sds">Alta resolución, lista para compartir</div></div></button>
-      <button class="sbtn sb-cp" id="btn-cp-img"><div class="sico">&#128203;</div><div class="slb" id="cplbl"><div>Copiar imagen al portapapeles</div><div class="sds">Pega en WhatsApp Web, Gmail...</div></div></button>
-      <button class="sbtn sb-em" id="btn-email"><div class="sico">&#9993;</div><div class="slb"><div>Enviar por email</div><div class="sds">Descarga y abre tu cliente de correo</div></div></button>
     </div>
     <div id="share-inst"></div>
     <div class="scr">
@@ -771,21 +773,24 @@ function addTextAt(x, y){
 
   function enterEdit(){
     txt.contentEditable = 'true';
-    txt.style.cursor = 'text';
-    d.style.cursor = 'text';
+    txt.classList.add('editing');
     txt.focus();
     var r = document.createRange(); r.selectNodeContents(txt);
     var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
   }
   function exitEdit(){
     txt.contentEditable = 'false';
-    txt.style.cursor = '';
-    d.style.cursor = '';
+    txt.classList.remove('editing');
     window.getSelection().removeAllRanges();
+    txt.blur();
   }
+  // Doble clic → editar. Clic simple → solo seleccionar/mover (gestionado por makeDrag)
   txt.addEventListener('dblclick', function(e){ e.stopPropagation(); enterEdit(); });
-  txt.addEventListener('mousedown', function(e){ if(txt.contentEditable==='true') e.stopPropagation(); });
-  txt.addEventListener('blur', function(){ exitEdit(); });
+  // Cuando está en modo edición, el mousedown no debe propagarse (para no iniciar drag)
+  txt.addEventListener('mousedown', function(e){
+    if(txt.contentEditable === 'true') e.stopPropagation();
+  });
+  txt.addEventListener('blur', function(){ setTimeout(exitEdit, 100); });
   txt.addEventListener('keydown', function(e){ if(e.key==='Escape'){ exitEdit(); e.preventDefault(); } });
 
   boldBtn.addEventListener('click', function(){
@@ -1033,7 +1038,24 @@ function filePickMany(cb){
 
 document.getElementById('tbtn-sw').addEventListener('click', function(){ var c=center(); addSwatchAt('#B27C52','Cobre',c[0],c[1]); });
 document.getElementById('tbtn-note').addEventListener('click', function(){ var c=center(); addNoteAt('',c[0],c[1]); });
-document.getElementById('tbtn-txt').addEventListener('click', function(){ var c=center(); addTextAt(c[0],c[1]); });
+document.getElementById('tbtn-txt').addEventListener('click', function(){
+  var btn = document.getElementById('tbtn-txt');
+  if(btn.classList.contains('on')){ btn.classList.remove('on'); canvas.style.cursor='default'; return; }
+  // Modo colocación: siguiente clic en canvas pone el texto ahí
+  btn.classList.add('on');
+  canvas.style.cursor = 'crosshair';
+  function placeTxt(e){
+    if(e.target.closest('#tb')||e.target.closest('button')) return;
+    canvas.removeEventListener('click', placeTxt);
+    btn.classList.remove('on');
+    canvas.style.cursor = 'default';
+    // Convertir coordenadas de pantalla a coordenadas del board
+    var x = (e.clientX - tx.x) / tx.s - 60;
+    var y = (e.clientY - tx.y) / tx.s - 20;
+    addTextAt(x, y);
+  }
+  setTimeout(function(){ canvas.addEventListener('click', placeTxt); }, 50);
+});
 document.getElementById('tbtn-tag').addEventListener('click', function(){ var c=center(); addWeddingCard(c[0],c[1]); });
 document.getElementById('tbtn-del').addEventListener('click', function(){ if(selItem){selItem.remove();selItem=null;} });
 document.getElementById('btn-clear').addEventListener('click', function(){
@@ -1339,21 +1361,30 @@ function stampWatermark(dataUrl, cb){
 
 // ---- CAPTURA ----
 function captureBoard(cb){
-  canvas.classList.add('capturing');
-  // pequeña pausa para que el DOM aplique los estilos de captura
+  // Ocultar UI antes de capturar
+  var hide = ['header','#tb','#panel','#toast','#share-modal','#photo-ov','#img-mode-pop'];
+  var els = hide.map(function(s){ return document.querySelector(s); }).filter(Boolean);
+  els.forEach(function(el){ el.style.visibility='hidden'; });
+  // Quitar outline de selección
+  if(selItem) selItem.classList.remove('sel');
+
   setTimeout(function(){
     html2canvas(canvas,{
-      scale:1.5, useCORS:true, allowTaint:true,
-      backgroundColor:'#E6D7B8', logging:false,
-      windowWidth:window.innerWidth, windowHeight:window.innerHeight
+      scale:1.5,
+      useCORS:true,
+      allowTaint:true,
+      backgroundColor:'#E6D7B8',
+      logging:false
     }).then(function(c){
-      canvas.classList.remove('capturing');
+      els.forEach(function(el){ el.style.visibility=''; });
+      if(selItem) selItem.classList.add('sel');
       stampWatermark(c.toDataURL('image/png'), cb);
     }).catch(function(e){
-      canvas.classList.remove('capturing');
+      els.forEach(function(el){ el.style.visibility=''; });
+      if(selItem) selItem.classList.add('sel');
       console.error(e); cb(null);
     });
-  }, 80);
+  }, 60);
 }
 
 function dataUrlToBlob(dataUrl){
