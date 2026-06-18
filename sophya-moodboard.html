@@ -1428,29 +1428,6 @@ document.getElementById('btn-share-close').addEventListener('click', function(){
 
 document.getElementById('btn-dl-png').addEventListener('click', function(){ if(window._snap) doDownload(window._snap); });
 
-document.getElementById('btn-cp-img').addEventListener('click', function(){
-  if(!window._snap) return;
-  var blob=dataUrlToBlob(window._snap);
-  var items={}; items['image/png']=blob;
-  navigator.clipboard.write([new ClipboardItem(items)]).then(function(){
-    var lbl=document.getElementById('cplbl');
-    lbl.innerHTML='<div>Imagen copiada!</div><div class="sds">Pega con Ctrl+V en cualquier app</div>';
-    setTimeout(function(){ lbl.innerHTML='<div>Copiar imagen al portapapeles</div><div class="sds">Pega en WhatsApp Web, Gmail...</div>'; },3000);
-    toast('Imagen copiada');
-  }).catch(function(){
-    doDownload(window._snap);
-    showInst('Tu navegador no permite copiar imagenes. Se ha descargado el PNG.');
-  });
-});
-
-document.getElementById('btn-email').addEventListener('click', function(){
-  if(window._snap) doDownload(window._snap);
-  var names=document.getElementById('couple-title').textContent||'';
-  var subj=encodeURIComponent('Moodboard de boda - '+names);
-  var body=encodeURIComponent('Hola,\n\nAdjunto nuestro moodboard de boda.\n\nCreado con Sophya.');
-  setTimeout(function(){ window.open('mailto:?subject='+subj+'&body='+body,'_blank'); },400);
-  showInst('Imagen descargada. Adjuntala al email antes de enviar.');
-});
 
 
 // ---- MODO FOTO ----
@@ -1554,7 +1531,7 @@ document.getElementById('btn-capture').addEventListener('click', function(){
   var hint = document.getElementById('empty-hint');
   if(!hint) return;
   var obs = new MutationObserver(function(){
-    hint.style.opacity = board.children.length === 0 ? '1' : '0';
+    hint.style.display = board.children.length === 0 ? 'block' : 'none';
   });
   obs.observe(board, {childList:true});
 })();
