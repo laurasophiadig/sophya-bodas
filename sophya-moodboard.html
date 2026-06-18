@@ -1369,13 +1369,19 @@ function captureBoard(cb){
     windowWidth:window.innerWidth, windowHeight:window.innerHeight,
     ignoreElements:function(el){
       return el.tagName==='HEADER' || UI_IDS.indexOf(el.id)>=0;
+    },
+    onclone:function(doc){
+      // Eliminar Google Fonts del clon para evitar que tainte el canvas en HTTPS
+      doc.querySelectorAll('link[href*="googleapis"],link[href*="gstatic"]').forEach(function(l){ l.remove(); });
     }
   }).then(function(c){
     if(selItem) selItem.classList.add('sel');
-    stampWatermark(c.toDataURL('image/png'), cb);
+    var dataUrl;
+    try { dataUrl = c.toDataURL('image/png'); } catch(e){ console.error('toDataURL:', e); dataUrl = null; }
+    if(dataUrl) stampWatermark(dataUrl, cb); else cb(null);
   }).catch(function(e){
     if(selItem) selItem.classList.add('sel');
-    console.error('html2canvas error:', e);
+    console.error('html2canvas:', e);
     cb(null);
   });
 }
@@ -1515,10 +1521,16 @@ document.getElementById('btn-capture').addEventListener('click', function(){
     windowWidth:window.innerWidth, windowHeight:window.innerHeight,
     ignoreElements:function(el){
       return el.tagName==='HEADER' || UI_IDS.indexOf(el.id)>=0;
+    },
+    onclone:function(doc){
+      doc.querySelectorAll('link[href*="googleapis"],link[href*="gstatic"]').forEach(function(l){ l.remove(); });
     }
   }).then(function(c){
+    var dataUrl;
+    try { dataUrl = c.toDataURL('image/png'); } catch(e){ dataUrl = null; }
+    if(!dataUrl){ document.getElementById('photo-ov').style.display=''; toast('Error al capturar'); btn.textContent='Capturar zona'; btn.disabled=false; return; }
     document.getElementById('photo-ov').style.display='';
-    stampWatermark(c.toDataURL('image/png'), function(stamped){ doDownload(stamped); });
+    stampWatermark(dataUrl, function(stamped){ doDownload(stamped); });
     document.getElementById('photo-ov').classList.remove('open');
   }).catch(function(e){
     document.getElementById('photo-ov').style.display='';
