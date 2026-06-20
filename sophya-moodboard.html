@@ -338,6 +338,7 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
   <div class="logo">s<em>ophya</em></div>
   <div id="couple-title" contenteditable="true" spellcheck="false"></div>
   <div class="hright">
+    <button class="btn-g" id="btn-save">&#9744; Guardar</button>
     <button class="btn-g" id="btn-clear">&#10022; Limpiar</button>
     <button class="btn-g" id="btn-guia">&#9998; Guía de estilo</button>
     <button class="btn-g" id="btn-photo">&#9723; Modo foto</button>
@@ -1371,8 +1372,10 @@ function captureBoard(cb){
       return el.tagName==='HEADER' || UI_IDS.indexOf(el.id)>=0;
     },
     onclone:function(doc){
-      // Eliminar Google Fonts del clon para evitar que tainte el canvas en HTTPS
       doc.querySelectorAll('link[href*="googleapis"],link[href*="gstatic"]').forEach(function(l){ l.remove(); });
+      var s=doc.createElement('style');
+      s.textContent=':root{--font-serif:Georgia,serif;--font-sans:Arial,sans-serif}';
+      doc.head.appendChild(s);
     }
   }).then(function(c){
     if(selItem) selItem.classList.add('sel');
@@ -1524,6 +1527,9 @@ document.getElementById('btn-capture').addEventListener('click', function(){
     },
     onclone:function(doc){
       doc.querySelectorAll('link[href*="googleapis"],link[href*="gstatic"]').forEach(function(l){ l.remove(); });
+      var s=doc.createElement('style');
+      s.textContent=':root{--font-serif:Georgia,serif;--font-sans:Arial,sans-serif}';
+      doc.head.appendChild(s);
     }
   }).then(function(c){
     var dataUrl;
@@ -1644,7 +1650,8 @@ function restoreBoard(data){
   });
 }
 
-document.getElementById('btn-save').addEventListener('click', function(){
+var btnSave = document.getElementById('btn-save');
+if(btnSave) btnSave.addEventListener('click', function(){
   try {
     var data = serializeBoard();
     localStorage.setItem(SAVE_KEY, JSON.stringify(data));
