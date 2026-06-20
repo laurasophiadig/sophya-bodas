@@ -338,7 +338,6 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
   <div class="logo">s<em>ophya</em></div>
   <div id="couple-title" contenteditable="true" spellcheck="false"></div>
   <div class="hright">
-    <button class="btn-g" id="btn-save">&#9744; Guardar</button>
     <button class="btn-g" id="btn-clear">&#10022; Limpiar</button>
     <button class="btn-g" id="btn-guia">&#9998; Guía de estilo</button>
     <button class="btn-g" id="btn-photo">&#9723; Modo foto</button>
@@ -1559,131 +1558,6 @@ document.getElementById('btn-capture').addEventListener('click', function(){
   obs.observe(board, {childList:true});
 })();
 
-// ---- GUARDAR / RESTAURAR ----
-var SAVE_KEY = 'sophya-board-v1';
-
-function serializeBoard(){
-  var items = [];
-  board.querySelectorAll('.bi').forEach(function(el){
-    var type = el.dataset.type;
-    var obj = {
-      type: type,
-      x: parseFloat(el.style.left)||0,
-      y: parseFloat(el.style.top)||0,
-      z: parseInt(el.style.zIndex)||10,
-      w: parseFloat(el.style.width)||0,
-      angle: parseFloat(el.dataset.angle)||0,
-      frameless: el.classList.contains('frameless')
-    };
-    if(type==='note'){
-      var ta = el.querySelector('textarea'); obj.text = ta ? ta.value : '';
-    } else if(type==='swatch'){
-      var inp = el.querySelector('input[type=color]'); var nm = el.querySelector('.sw-nm');
-      obj.hex = inp ? inp.value : '#B27C52'; obj.name = nm ? nm.textContent : '';
-    } else if(type==='tag'){
-      var icon = el.querySelector('.ti'); var lbl = el.querySelector('.tl'); var val = el.querySelector('.tv');
-      obj.icon = icon ? icon.textContent : '◈';
-      obj.label = lbl ? lbl.textContent : '';
-      obj.value = val ? val.textContent : '';
-    } else if(type==='headline'){
-      var hl = el.querySelector('.chl'); obj.html = hl ? hl.innerHTML : '';
-    } else if(type==='text'){
-      var ct = el.querySelector('.ctxt');
-      obj.text = ct ? ct.textContent : '';
-      obj.fontSize = ct ? ct.style.fontSize : '22px';
-      obj.fontWeight = ct ? ct.style.fontWeight : '300';
-      obj.fontStyle = ct ? ct.style.fontStyle : 'normal';
-    } else if(type==='guidenote'){
-      var bodies = el.querySelectorAll('.gn-body'); var tits = el.querySelectorAll('.gn-tit');
-      obj.sections = Array.prototype.map.call(tits, function(t,i){
-        return t.textContent + '\n' + (bodies[i] ? bodies[i].textContent : '');
-      });
-    } else if(type==='wedcard'){
-      var vals = el.querySelectorAll('.cw-val');
-      obj.wvals = Array.prototype.map.call(vals, function(v){ return v.textContent; });
-      var selH = el.querySelector('.cwh.sel'); obj.horario = selH ? selH.textContent : '';
-    } else if(type==='polaroid'){
-      var img = el.querySelector('.pol-img'); var cap = el.querySelector('.pol-cap');
-      obj.src = (img && img.src && img.src.startsWith('data:')) ? img.src : null;
-      obj.caption = cap ? cap.textContent : '';
-    }
-    items.push(obj);
-  });
-  return {
-    items: items,
-    coupleTitle: document.getElementById('couple-title').textContent,
-    tx: tx,
-    zIdx: zIdx
-  };
-}
-
-function restoreBoard(data){
-  board.innerHTML = ''; zIdx = data.zIdx || 10;
-  if(data.tx){ tx.x=data.tx.x||0; tx.y=data.tx.y||0; tx.s=data.tx.s||1; applyTx(); }
-  document.getElementById('couple-title').textContent = data.coupleTitle || '';
-  (data.items||[]).forEach(function(obj){
-    var d;
-    if(obj.type==='note'){ d=addNoteAt(obj.text, obj.x, obj.y); }
-    else if(obj.type==='swatch'){ d=addSwatchAt(obj.hex, obj.name, obj.x, obj.y); }
-    else if(obj.type==='tag'){ d=addTagAt(obj.icon, obj.label, obj.value, obj.x, obj.y); }
-    else if(obj.type==='headline'){ d=addHeadline(obj.x, obj.y); var hl=d.querySelector('.chl'); if(hl&&obj.html) hl.innerHTML=obj.html; }
-    else if(obj.type==='text'){
-      d=addTextAt(obj.x, obj.y);
-      var ct=d.querySelector('.ctxt');
-      if(ct){ ct.textContent=obj.text||''; ct.style.fontSize=obj.fontSize||'22px'; ct.style.fontWeight=obj.fontWeight||'300'; ct.style.fontStyle=obj.fontStyle||'normal'; }
-    }
-    else if(obj.type==='guidenote'){ var text=(obj.sections||[]).join('\n\n'); d=addGuideNote(text, obj.x, obj.y); }
-    else if(obj.type==='wedcard'){
-      d=addWeddingCard(obj.x, obj.y);
-      if(obj.wvals){ var vals=d.querySelectorAll('.cw-val'); obj.wvals.forEach(function(v,i){ if(vals[i]) vals[i].textContent=v; }); }
-      if(obj.horario){ d.querySelectorAll('.cwh').forEach(function(h){ if(h.textContent===obj.horario) h.classList.add('sel'); }); }
-    }
-    else if(obj.type==='polaroid'){
-      d=addPolaroid(obj.src||null, obj.caption, obj.x, obj.y);
-      if(obj.frameless) d.classList.add('frameless');
-    }
-    if(d){
-      d.style.zIndex = obj.z || ++zIdx;
-      if(obj.w) d.style.width = obj.w + 'px';
-      if(obj.angle){ d.dataset.angle=obj.angle; d.style.transform='rotate('+obj.angle+'deg)'; }
-    }
-  });
-}
-
-var btnSave = document.getElementById('btn-save');
-if(btnSave) btnSave.addEventListener('click', function(){
-  try {
-    var data = serializeBoard();
-    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
-    var btn = document.getElementById('btn-save');
-    btn.textContent = '✓ Guardado';
-    setTimeout(function(){ btn.innerHTML='&#9744; Guardar'; }, 2000);
-    toast('Moodboard guardado');
-  } catch(e){ toast('Error al guardar'); }
-});
-
-// Ofrecer restaurar si hay sesión guardada
-(function(){
-  var saved = null;
-  try { saved = JSON.parse(localStorage.getItem(SAVE_KEY)); } catch(e){}
-  if(!saved || !saved.items || !saved.items.length) return;
-  // Mostrar opción de restaurar en el modal inicial
-  var mbox = document.querySelector('.mbox');
-  var restore = document.createElement('div');
-  restore.style.cssText='margin-top:16px;padding:12px 14px;background:rgba(14,75,79,.06);border-radius:2px;border-left:2px solid var(--sophya-cobre)';
-  restore.innerHTML='<div style="font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--sophya-teal);margin-bottom:8px">Sesión guardada</div>'
-    +'<div style="font-family:\'Cormorant Garamond\',serif;font-size:15px;font-style:italic;color:var(--sophya-cobre);margin-bottom:10px">'+(saved.coupleTitle||'Moodboard anterior')+'</div>'
-    +'<button id="btn-restore" style="background:var(--sophya-teal);color:var(--sophya-crema);border:none;padding:8px 18px;border-radius:2px;font-family:\'DM Sans\',sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;margin-right:8px">Recuperar &rarr;</button>'
-    +'<button id="btn-restore-skip" style="background:none;border:none;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sophya-cobre);cursor:pointer;opacity:.7">Empezar nuevo</button>';
-  mbox.appendChild(restore);
-  document.getElementById('btn-restore').addEventListener('click', function(){
-    document.getElementById('modal').style.display='none';
-    restoreBoard(saved);
-  });
-  document.getElementById('btn-restore-skip').addEventListener('click', function(){
-    restore.style.display='none';
-  });
-})();
 
 // ---- TECLADO ----
 document.addEventListener('keydown', function(e){
