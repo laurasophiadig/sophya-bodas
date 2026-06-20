@@ -315,6 +315,16 @@ textarea.pi{resize:vertical;min-height:72px;line-height:1.75}
 /* TOAST */
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--sophya-teal);color:var(--sophya-crema);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:8px 22px;border-radius:var(--r-base);opacity:0;transition:opacity var(--dur) var(--ease-quiet);pointer-events:none;z-index:300}
 #toast.show{opacity:1}
+
+/* FAB SOPHYA */
+#sophya-fab{position:fixed;bottom:24px;right:24px;z-index:250}
+#sophya-fab>img{width:52px;height:52px;border-radius:12px;cursor:pointer;display:block;box-shadow:0 4px 16px rgba(9,51,54,.25);transition:transform .2s}
+#sophya-fab:hover>img{transform:scale(1.07)}
+.fab-tip{position:absolute;bottom:64px;right:0;width:220px;background:#093336;color:#F6EFE6;padding:14px 16px;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5;pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
+#sophya-fab:hover .fab-tip,#sophya-fab.tip-open .fab-tip{opacity:1;transform:translateY(0);pointer-events:auto}
+.fab-tip p{margin:0 0 2px}
+.fab-cta{display:inline-block;margin-top:10px;color:#B27C52;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+.fab-cta:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -1360,7 +1370,7 @@ function stampWatermark(dataUrl, cb){
 }
 
 // ---- CAPTURA ----
-var UI_IDS = ['tb','panel','toast','share-modal','photo-ov','img-mode-pop','empty-hint'];
+var UI_IDS = ['tb','panel','toast','share-modal','photo-ov','img-mode-pop','empty-hint','sophya-fab'];
 function captureBoard(cb){
   if(selItem) selItem.classList.remove('sel');
   html2canvas(canvas,{
@@ -1375,6 +1385,12 @@ function captureBoard(cb){
       var s=doc.createElement('style');
       s.textContent=':root{--font-serif:Georgia,serif;--font-sans:Arial,sans-serif}';
       doc.head.appendChild(s);
+      doc.querySelectorAll('.pol-img').forEach(function(img){
+        var w=img.style.width||'190px'; var h=img.style.height||'210px';
+        var div=doc.createElement('div');
+        div.style.cssText='width:'+w+';height:'+h+';background-image:url("'+img.src+'");background-size:cover;background-position:center;display:block';
+        img.parentNode.replaceChild(div,img);
+      });
     }
   }).then(function(c){
     if(selItem) selItem.classList.add('sel');
@@ -1529,6 +1545,12 @@ document.getElementById('btn-capture').addEventListener('click', function(){
       var s=doc.createElement('style');
       s.textContent=':root{--font-serif:Georgia,serif;--font-sans:Arial,sans-serif}';
       doc.head.appendChild(s);
+      doc.querySelectorAll('.pol-img').forEach(function(img){
+        var w=img.style.width||'190px'; var h=img.style.height||'210px';
+        var div=doc.createElement('div');
+        div.style.cssText='width:'+w+';height:'+h+';background-image:url("'+img.src+'");background-size:cover;background-position:center;display:block';
+        img.parentNode.replaceChild(div,img);
+      });
     }
   }).then(function(c){
     var dataUrl;
@@ -1573,6 +1595,24 @@ document.addEventListener('keydown', function(e){
 });
 
 })();
+
+// ---- FAB SOPHYA ----
+document.getElementById('sophya-fab').addEventListener('click', function(e){
+  if(e.target.tagName==='A') return;
+  this.classList.toggle('tip-open');
+});
+
+})();
 </script>
+
+<!-- FAB: logo Sophya → Tidycal -->
+<div id="sophya-fab">
+  <img src="images/icon-sophya.png" alt="Sophya">
+  <div class="fab-tip">
+    <p>¿Os gusta cómo queda?<br>El siguiente paso es vuestro.</p>
+    <a href="https://tidycal.com/sophya-estudio/reunion-45" target="_blank" rel="noopener" class="fab-cta">Reserva vuestra reunión →</a>
+  </div>
+</div>
+
 </body>
 </html>
