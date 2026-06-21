@@ -374,7 +374,7 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
       var success = form.parentElement.querySelector('.form-success');
       var go = function(){
         if(success){ form.style.display='none'; success.style.display='block'; }
-        setTimeout(function(){ window.location.href = 'sophya-moodboard.html'; }, 1200);
+        setTimeout(function(){ window.location.href = 'confirmacion.html'; }, 1200);
       };
       fetch(form.action, { method:'POST', mode:'no-cors', body:new FormData(form) })
         .then(go).catch(go);
