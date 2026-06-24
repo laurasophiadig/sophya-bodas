@@ -15,32 +15,33 @@ export default async function handler(req) {
     const fuente = params.get('FUENTE') || '';
 
     if (email) {
-      // Registra el contacto en el formulario Brevo (asociación + triggers de form)
-      fetch(FORM_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          EMAIL: email,
-          FIRSTNAME: nombre,
-          email_address_check: '',
-          locale: 'es'
-        }).toString()
-      }).catch(() => {});
-
-      // Guarda atributos extendidos (FUENTE) via API directa
-      await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'api-key': process.env.BREVO_API_KEY
-        },
-        body: JSON.stringify({
-          email,
-          attributes: { NOMBRE: nombre, FUENTE: fuente },
-          listIds: [11],
-          updateEnabled: true
+      await Promise.all([
+        // Asocia el contacto al formulario Brevo (triggers de form)
+        fetch(FORM_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            EMAIL: email,
+            FIRSTNAME: nombre,
+            email_address_check: '',
+            locale: 'es'
+          }).toString()
+        }),
+        // Guarda atributos extendidos (NOMBRE, FUENTE) via API directa
+        fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': process.env.BREVO_API_KEY
+          },
+          body: JSON.stringify({
+            email,
+            attributes: { NOMBRE: nombre, FUENTE: fuente },
+            listIds: [11],
+            updateEnabled: true
+          })
         })
-      });
+      ]);
     }
   } catch (e) {
     console.error('Brevo subscribe error:', e);
