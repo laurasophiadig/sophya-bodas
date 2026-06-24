@@ -48,14 +48,14 @@ h1 em{color:var(--malva);font-style:italic}
 /* FORM */
 .form-wrap{max-width:380px}
 .form-wrap form{display:flex;flex-direction:column;gap:10px}
-input[type=email]{
+input[type=email],input[type=text]{
   width:100%;padding:13px 16px;
   border:1px solid rgba(14,75,79,.22);border-radius:var(--r);
   background:var(--crema);font-family:var(--font-sans);font-size:14px;
   color:var(--teal-deep);outline:none;transition:border-color var(--dur) var(--ease)
 }
-input[type=email]:focus{border-color:var(--cobre)}
-input[type=email]::placeholder{color:var(--cobre);opacity:.5;font-style:italic;font-family:var(--font-serif);font-size:15px}
+input[type=email]:focus,input[type=text]:focus{border-color:var(--cobre)}
+input[type=email]::placeholder,input[type=text]::placeholder{color:var(--cobre);opacity:.5;font-style:italic;font-family:var(--font-serif);font-size:15px}
 #submit-btn{
   width:100%;padding:15px 24px;background:var(--teal);color:var(--crema);
   border:none;border-radius:var(--r);font-family:var(--font-sans);
@@ -198,11 +198,17 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
         3. Reemplaza FORM_ID_AQUI con tu ID real
       -->
       <form id="signup-form" class="signup-form"
-            action="https://app.kit.com/forms/9561184/subscriptions"
+            action="https://7d665377.sibforms.com/v2/serve/MUIFAN_c3zoBeZh2UAsFzCrQSSBlAaP5yXtuRZ8XbCS7jCBKM8njp6BDwLoJsvsk588oVLnZXv42IIUMVn5sCeDToFv4VdkqH3MeC3PkYvrYvfQ8_RYwxv8hOgKsoZwjPSIWXkYu2j91WvLjR5HggcTxc-cSfJWHsmDSk83Kpup4pHC2oSxoscagm7k_r6peSA8REj0YnHIQ31Ax"
             method="POST"
-            target="_blank">
+            data-type="subscription">
+        <input type="hidden" name="email_address_check" value="">
+        <input type="hidden" name="locale" value="es">
+        <input type="text"
+               name="FIRSTNAME"
+               placeholder="Tu nombre"
+               autocomplete="given-name">
         <input type="email"
-               name="email_address"
+               name="EMAIL"
                placeholder="tu@email.com"
                required
                autocomplete="email">
@@ -325,11 +331,14 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
   <h2 class="cta-t reveal">Vuestro punto de <em>partida.</em></h2>
   <p class="cta-s reveal reveal-delay-1">Dejad vuestro email y abrís el moodboard al momento. Es gratis.</p>
   <form class="signup-form cta-form"
-        action="https://app.kit.com/forms/9561184/subscriptions"
+        action="https://7d665377.sibforms.com/v2/serve/MUIFAN_c3zoBeZh2UAsFzCrQSSBlAaP5yXtuRZ8XbCS7jCBKM8njp6BDwLoJsvsk588oVLnZXv42IIUMVn5sCeDToFv4VdkqH3MeC3PkYvrYvfQ8_RYwxv8hOgKsoZwjPSIWXkYu2j91WvLjR5HggcTxc-cSfJWHsmDSk83Kpup4pHC2oSxoscagm7k_r6peSA8REj0YnHIQ31Ax"
         method="POST"
-        target="_blank">
-    <input type="email" name="email_address" placeholder="tu@email.com" required autocomplete="email">
-    <button type="submit" class="cta-submit" disabled>Crear nuestro moodboard →</button>
+        data-type="subscription">
+    <input type="hidden" name="email_address_check" value="">
+    <input type="hidden" name="locale" value="es">
+    <input type="text" name="FIRSTNAME" placeholder="Tu nombre" autocomplete="given-name">
+    <input type="email" name="EMAIL" placeholder="tu@email.com" required autocomplete="email">
+    <button type="submit" class="cta-submit" disabled>Crear mi moodboard →</button>
   </form>
   <div class="gdpr-wrap" style="justify-content:center;max-width:560px;margin:10px auto 0">
     <input type="checkbox" id="consent-cta" required>
@@ -365,7 +374,7 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
   var forms = document.querySelectorAll('.signup-form');
   forms.forEach(function(form){
     form.addEventListener('submit', function(e){
-      var email = form.querySelector('input[type="email"]');
+      var email = form.querySelector('input[name="EMAIL"]');
       if(!email || !email.value) return;
       e.preventDefault();
       form.removeAttribute('target');
