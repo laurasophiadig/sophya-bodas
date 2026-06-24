@@ -10,6 +10,7 @@ export default async function handler(req) {
     const params = new URLSearchParams(body);
     const email  = params.get('EMAIL')  || '';
     const nombre = params.get('NOMBRE') || '';
+    const fuente = params.get('FUENTE') || '';
 
     if (email) {
       await fetch('https://api.brevo.com/v3/contacts', {
@@ -20,7 +21,7 @@ export default async function handler(req) {
         },
         body: JSON.stringify({
           email,
-          attributes: { NOMBRE: nombre },
+          attributes: { NOMBRE: nombre, FUENTE: fuente },
           listIds: [11],
           updateEnabled: true
         })
