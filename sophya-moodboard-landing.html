@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -198,11 +198,8 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
         3. Reemplaza FORM_ID_AQUI con tu ID real
       -->
       <form id="signup-form" class="signup-form"
-            action="https://7d665377.sibforms.com/v2/serve/MUIFAN_c3zoBeZh2UAsFzCrQSSBlAaP5yXtuRZ8XbCS7jCBKM8njp6BDwLoJsvsk588oVLnZXv42IIUMVn5sCeDToFv4VdkqH3MeC3PkYvrYvfQ8_RYwxv8hOgKsoZwjPSIWXkYu2j91WvLjR5HggcTxc-cSfJWHsmDSk83Kpup4pHC2oSxoscagm7k_r6peSA8REj0YnHIQ31Ax"
-            method="POST"
-            data-type="subscription">
-        <input type="hidden" name="email_address_check" value="">
-        <input type="hidden" name="locale" value="es">
+            action="/api/subscribe"
+            method="POST">
         <input type="text"
                name="NOMBRE"
                placeholder="Tu nombre"
@@ -331,11 +328,8 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
   <h2 class="cta-t reveal">Vuestro punto de <em>partida.</em></h2>
   <p class="cta-s reveal reveal-delay-1">Dejad vuestro email y abrís el moodboard al momento. Es gratis.</p>
   <form class="signup-form cta-form"
-        action="https://7d665377.sibforms.com/v2/serve/MUIFAN_c3zoBeZh2UAsFzCrQSSBlAaP5yXtuRZ8XbCS7jCBKM8njp6BDwLoJsvsk588oVLnZXv42IIUMVn5sCeDToFv4VdkqH3MeC3PkYvrYvfQ8_RYwxv8hOgKsoZwjPSIWXkYu2j91WvLjR5HggcTxc-cSfJWHsmDSk83Kpup4pHC2oSxoscagm7k_r6peSA8REj0YnHIQ31Ax"
-        method="POST"
-        data-type="subscription">
-    <input type="hidden" name="email_address_check" value="">
-    <input type="hidden" name="locale" value="es">
+        action="/api/subscribe"
+        method="POST">
     <input type="text" name="NOMBRE" placeholder="Tu nombre" autocomplete="given-name">
     <input type="email" name="EMAIL" placeholder="tu@email.com" required autocomplete="email">
     <button type="submit" class="cta-submit" disabled>Crear mi moodboard →</button>
@@ -373,20 +367,9 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 
   var forms = document.querySelectorAll('.signup-form');
   forms.forEach(function(form){
-    form.addEventListener('submit', function(e){
-      var email = form.querySelector('input[name="EMAIL"]');
-      if(!email || !email.value) return;
-      e.preventDefault();
-      form.removeAttribute('target');
+    form.addEventListener('submit', function(){
       var btn = form.querySelector('button[type="submit"]');
       if(btn){ btn.disabled = true; btn.textContent = 'Un momento…'; }
-      var success = form.parentElement.querySelector('.form-success');
-      var go = function(){
-        if(success){ form.style.display='none'; success.style.display='block'; }
-        setTimeout(function(){ window.location.href = 'confirmacion.html'; }, 1200);
-      };
-      fetch(form.action, { method:'POST', mode:'no-cors', body:new FormData(form) })
-        .then(go).catch(go);
     });
   });
 })();
@@ -394,3 +377,4 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
 
 </body>
 </html>
+
