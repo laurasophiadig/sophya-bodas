@@ -8,9 +8,11 @@ export default async function handler(req) {
   try {
     const body = await req.text();
     const params = new URLSearchParams(body);
-    const email  = params.get('EMAIL')  || '';
-    const nombre = params.get('NOMBRE') || '';
-    const fuente = params.get('FUENTE') || '';
+    const email   = params.get('EMAIL')   || '';
+    const nombre  = params.get('NOMBRE')  || '';
+    const fuente  = params.get('FUENTE')  || 'leadmagnet-modboard';
+    const seccion = params.get('SECCION') || '';
+    const fuenteFinal = seccion ? fuente + '/' + seccion : fuente;
 
     if (email) {
       await fetch('https://api.brevo.com/v3/contacts', {
@@ -21,7 +23,7 @@ export default async function handler(req) {
         },
         body: JSON.stringify({
           email,
-          attributes: { NOMBRE: nombre, FUENTE: fuente },
+          attributes: { NOMBRE: nombre, FUENTE: fuenteFinal },
           listIds: [11],
           updateEnabled: true
         })

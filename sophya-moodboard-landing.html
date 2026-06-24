@@ -209,6 +209,7 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
                required
                autocomplete="email">
         <input type="hidden" name="FUENTE" value="">
+        <input type="hidden" name="SECCION" value="superior">
         <div class="gdpr-wrap">
           <input type="checkbox" id="consent-main" required>
           <label class="gdpr-label" for="consent-main">Acepto recibir el moodboard y comunicaciones de Sophya. <a href="privacidad.html" target="_blank">Política de privacidad</a>.</label>
@@ -333,6 +334,7 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
     <input type="text" name="NOMBRE" placeholder="Tu nombre" autocomplete="given-name">
     <input type="email" name="EMAIL" placeholder="tu@email.com" required autocomplete="email">
     <input type="hidden" name="FUENTE" value="">
+    <input type="hidden" name="SECCION" value="inferior">
     <button type="submit" class="cta-submit" disabled>Crear mi moodboard →</button>
   </form>
   <div class="gdpr-wrap" style="justify-content:center;max-width:560px;margin:10px auto 0">
@@ -366,15 +368,17 @@ footer{padding:22px 40px;background:var(--teal-deep);display:flex;align-items:ce
     this.closest('.cta').querySelector('.cta-submit').disabled = !this.checked;
   });
 
-  // Capturar fuente: utm_source o dominio del referrer o "directo"
+  // Capturar fuente: utm_source, o "web" si viene del mismo dominio, o "leadmagnet-modboard"
   (function(){
     var p = new URLSearchParams(window.location.search);
     var src = p.get('utm_source') || '';
-    var med = p.get('utm_medium') || '';
     if(!src && document.referrer){
-      try{ src = new URL(document.referrer).hostname.replace('www.',''); }catch(e){}
+      try{
+        var refHost = new URL(document.referrer).hostname;
+        src = (refHost === location.hostname) ? 'web' : refHost.replace('www.','');
+      }catch(e){}
     }
-    var fuente = src ? (med ? src+'/'+med : src) : 'directo';
+    var fuente = src || 'leadmagnet-modboard';
     document.querySelectorAll('input[name="FUENTE"]').forEach(function(el){ el.value = fuente; });
   })();
 
